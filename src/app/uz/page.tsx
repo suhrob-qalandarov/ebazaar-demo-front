@@ -64,7 +64,7 @@ const AboutPage: React.FC = () => {
       <div className="min-h-screen bg-transparent">
         {/* --- Full Screen Hero Image Section --- */}
         <motion.section
-            className="relative w-full h-screen overflow-hidden"
+            className="relative w-full h-screen overflow-hidden rounded-b-[9rem]"
             initial="hidden"
             animate="visible"
             variants={fadeIn}
