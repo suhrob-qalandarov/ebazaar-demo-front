@@ -142,18 +142,34 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
                 ].map((link) => {
                   const fullPath = locale === 'uz' ? link.path : `/${locale}${link.path}`;
                   return (
-                    <a
+                    <motion.a
                       key={link.path}
                       href={fullPath}
                       onClick={(e) => {
                         e.preventDefault();
                         router.push(fullPath);
                       }}
-                      className="flex items-center gap-2 text-white text-lg font-semibold hover:text-blue-400 transition-colors cursor-pointer"
+                      className="relative flex items-center gap-2 text-lg font-medium cursor-pointer block w-full group"
+                      initial={{ x: 0 }}
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
                     >
-                      <ChevronRight className="w-5 h-5" />
-                      <span>{link.name}</span>
-                    </a>
+                      <motion.div
+                        className="flex items-center gap-2"
+                        style={{ color: "rgb(255, 255, 255)" }}
+                        whileHover={{ color: "rgb(37, 99, 235)" }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                      >
+                        <ChevronRight className="w-5 h-5" />
+                        <span>{link.name}</span>
+                      </motion.div>
+                      <motion.span
+                        className="absolute bottom-0 left-0 h-0.5 bg-blue-600"
+                        initial={{ width: 0 }}
+                        whileHover={{ width: "100%" }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                      />
+                    </motion.a>
                   );
                 })}
               </motion.div>

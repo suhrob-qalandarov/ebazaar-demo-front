@@ -196,6 +196,36 @@ const Navbar: React.FC = () => {
             </span>
           </motion.a>
 
+          {/* Desktop: Nav Links */}
+          {isScrolled && (
+            <div className="hidden lg:flex items-center gap-6 flex-1 justify-center">
+              {navLinks.map((link) => {
+                const isActive = isActiveLink(link.path);
+                const fullPath = getNavPath(link.path);
+                const defaultColor = isActive 
+                  ? "rgb(37, 99, 235)" 
+                  : "rgb(15, 23, 42)";
+                return (
+                  <a
+                    key={link.name}
+                    href={fullPath}
+                    onClick={(e) => handleNavClick(e, link.path)}
+                    className="text-lg font-medium cursor-pointer transition-colors duration-300"
+                    style={{ color: defaultColor }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "rgb(37, 99, 235)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = defaultColor;
+                    }}
+                  >
+                    {link.name}
+                  </a>
+                );
+              })}
+            </div>
+          )}
+
           {/* Desktop: Language Selector */}
           <div className="hidden lg:block relative language-selector flex-shrink-0">
             <motion.button
@@ -340,6 +370,9 @@ const Navbar: React.FC = () => {
                   {navLinks.map((link) => {
                     const isActive = isActiveLink(link.path);
                     const fullPath = getNavPath(link.path);
+                    const defaultColor = isActive 
+                      ? "rgb(37, 99, 235)" 
+                      : "rgb(255, 255, 255)";
                     return (
                       <motion.a
                         key={link.name}
@@ -348,14 +381,22 @@ const Navbar: React.FC = () => {
                           handleNavClick(e, link.path);
                           setIsMobileMenuOpen(false);
                         }}
-                        className={`block py-3 text-lg font-semibold transition-colors cursor-pointer text-center w-full ${
-                          isActive
-                            ? "text-blue-600 dark:text-blue-400"
-                            : "text-white hover:text-blue-400"
-                        }`}
-                        whileHover={{ x: 5 }}
+                        className="relative block py-3 text-xl font-medium cursor-pointer text-center w-full inline-block"
+                        initial={{ color: defaultColor, x: 0 }}
+                        animate={{ color: defaultColor }}
+                        whileHover={{
+                          x: 5,
+                          color: "rgb(37, 99, 235)"
+                        }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
                       >
                         {link.name}
+                        <motion.span
+                          className="absolute bottom-2 left-1/2 transform -translate-x-1/2 h-0.5 bg-blue-600"
+                          initial={{ width: 0 }}
+                          whileHover={{ width: "80%" }}
+                          transition={{ duration: 0.3, ease: "easeOut" }}
+                        />
                       </motion.a>
                     );
                   })}
