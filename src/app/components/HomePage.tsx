@@ -74,7 +74,7 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
     <div className="min-h-screen bg-transparent">
       {/* --- Full Screen Hero Image Section --- */}
       <motion.section
-        className="relative w-full h-screen overflow-hidden rounded-b-[9rem]"
+        className="relative w-full h-screen overflow-hidden md:rounded-b-[6rem] lg:rounded-b-[9rem]"
         initial="hidden"
         animate="visible"
         variants={fadeIn}
