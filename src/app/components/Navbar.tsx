@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Building2 } from "lucide-react";
+import { getStaticContent } from "@/content";
+import type { Locale } from "@/types/locale";
 
 // Flag Components
 const UzbekFlag: React.FC<{ className?: string }> = ({ className }) => (
@@ -76,6 +78,15 @@ const Navbar: React.FC = () => {
   };
 
   const currentLanguage = getCurrentLanguage();
+  // Use path instead of code, as path directly maps to locale ('uz', 'kr', 'ru')
+  const locale: Locale = currentLanguage.path as Locale;
+  const content = getStaticContent(locale);
+
+  const navLinks = [
+    { name: content.navbar.about, href: "#about" },
+    { name: content.navbar.clients, href: "#clients" },
+    { name: content.navbar.team, href: "#team" },
+  ];
 
   const handleLanguageChange = (lang: typeof languages[0]) => {
     const pathSegments = pathname.split('/').filter(Boolean);
@@ -114,12 +125,6 @@ const Navbar: React.FC = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isLanguageMenuOpen]);
-
-  const navLinks = [
-    { name: "Biz haqimizda", href: "#about" },
-    { name: "Bizning Mijozlarimiz", href: "#clients" },
-    { name: "Bizning Jamoa", href: "#team" },
-  ];
 
   return (
     <motion.nav
