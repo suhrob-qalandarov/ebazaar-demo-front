@@ -74,7 +74,7 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
     <div className="min-h-screen bg-transparent">
       {/* --- Hero Section: Mobile/iPad (Full Screen Image) & Desktop (Split Layout) --- */}
       <motion.section
-        className="relative w-full overflow-hidden md:rounded-b-[6rem] lg:rounded-b-none"
+        className="relative w-full overflow-hidden lg:rounded-b-none"
         initial="hidden"
         animate="visible"
         variants={fadeIn}
