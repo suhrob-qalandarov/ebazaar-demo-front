@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Building2 } from "lucide-react";
+import { X, Building2 } from "lucide-react";
 import { getStaticContent } from "@/content";
 import type { Locale } from "@/types/locale";
 
@@ -163,8 +163,8 @@ const Navbar: React.FC = () => {
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: (isScrolled || isMobileMenuOpen) ? "rgba(15, 23, 42, 0.5)" : "transparent", // Visible on scroll or mobile menu open, transparent by default
-        backdropFilter: (isScrolled || isMobileMenuOpen) ? "blur(12px)" : "none", // Blur on scroll or mobile menu open
+        background: isScrolled ? "rgba(15, 23, 42, 0.5)" : "transparent", // Visible on scroll, transparent by default
+        backdropFilter: isScrolled ? "blur(12px)" : "none", // Blur on scroll only
         boxShadow: "none" // No shadow
       }}
     >
@@ -299,15 +299,32 @@ const Navbar: React.FC = () => {
 
           {/* Mobile/iPad: Menu Button */}
           <button
-            className={`lg:hidden p-2 rounded-lg transition-colors ${
+            className={`lg:hidden p-2 ${
               isScrolled
-                ? "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-                : "text-white hover:bg-white/10"
+                ? "text-slate-700 dark:text-slate-300"
+                : "text-white"
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? (
+              <X size={24} />
+            ) : (
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            )}
           </button>
         </div>
       </div>
