@@ -12,7 +12,7 @@ export const uzContent = {
     badge: "Kompaniya haqida",
     title: "Sifatli",
     titleHighlight: "IT Yechimlar",
-    description: "EverbestLab — 2019-yildan buyon O'zbekistonda bizneslarni raqamlashtirish orqali ularning rivojlanishiga hissa qo'shib kelmoqda."
+    description: "2019-yildan buyon O'zbekistonda bizneslarni raqamlashtirish orqali ularning rivojlanishiga hissa qo'shib kelmoqda."
   },
   mission: {
     title: "Bizning Missiyamiz",

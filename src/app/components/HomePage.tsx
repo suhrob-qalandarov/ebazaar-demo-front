@@ -142,24 +142,38 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
           {/* Right Side: Image Box - Positioned to touch right and top edges (from navbar) */}
           <motion.div
             variants={fadeInUp}
-            className="hidden lg:block absolute right-0 top-0 w-[62%] h-[95%] rounded-bl-[4rem] overflow-hidden shadow-2xl group"
+            className="hidden lg:block absolute right-0 top-0 w-[62%] h-[95%] rounded-bl-[4rem] overflow-visible shadow-2xl group"
           >
             <div className="relative w-full h-full">
-              <Image
-                src="/main/def-3.jpg"
-                alt="Bazar Toshkent Chorsu"
-                fill
-                priority
-                className="object-cover object-right transition-transform duration-700 group-hover:scale-105"
-                style={{ objectPosition: 'left top' }}
-                quality={90}
-              />
-              {/* Gradient overlay from left to create depth */}
-              <div className="absolute inset-0 bg-gradient-to-r from-slate-900/40 via-transparent to-transparent" />
-              {/* Subtle vignette effect on bottom-right */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent" />
-              {/* Decorative corner accent */}
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-blue-600/20 to-transparent blur-3xl" />
+              <div className="absolute inset-0 rounded-bl-[4rem] overflow-hidden">
+                <Image
+                  src="/main/def-3.jpg"
+                  alt="Bazar Toshkent Chorsu"
+                  fill
+                  priority
+                  className="object-cover object-right transition-transform duration-700 group-hover:scale-105"
+                  style={{ objectPosition: 'left top' }}
+                  quality={90}
+                />
+                {/* Gradient overlay from left to create depth */}
+                <div className="absolute inset-0 bg-gradient-to-r from-slate-900/40 via-transparent to-transparent" />
+                {/* Subtle vignette effect on bottom-right */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent" />
+                {/* Decorative corner accent */}
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-blue-600/20 to-transparent blur-3xl" />
+              </div>
+              
+              {/* Quote Box on top of image - centered based on image height */}
+              <motion.div
+                variants={fadeInUp}
+                className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-center z-10"
+              >
+                <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform lg:-rotate-2 max-w-lg">
+                  <p className="text-xl font-medium leading-relaxed italic">
+                    "{content.quote.text}"
+                  </p>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
