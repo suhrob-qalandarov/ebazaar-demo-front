@@ -117,7 +117,8 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: "Biz haqimizda", href: "#about" },
-    { name: "Jamoa", href: "#team" },
+    { name: "Bizning Mijozlarimiz", href: "#clients" },
+    { name: "Bizning Jamoa", href: "#team" },
   ];
 
   return (
@@ -136,7 +137,7 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <motion.a
             href={currentLanguage.path === 'uz' ? '/' : `/${currentLanguage.path}`}
-            className="flex items-center gap-2 text-2xl font-bold"
+            className="flex items-center gap-2 text-2xl font-bold flex-shrink-0"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -154,8 +155,8 @@ const Navbar: React.FC = () => {
             </span>
           </motion.a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation - Center */}
+          <div className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
             {navLinks.map((link, index) => (
               <motion.a
                 key={link.name}
@@ -173,9 +174,10 @@ const Navbar: React.FC = () => {
                 {link.name}
               </motion.a>
             ))}
-            
-            {/* Language Selector */}
-            <div className="relative language-selector">
+          </div>
+          
+          {/* Language Selector - Right */}
+          <div className="hidden md:block relative language-selector flex-shrink-0">
               <motion.button
                 onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
@@ -239,7 +241,6 @@ const Navbar: React.FC = () => {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
           </div>
 
           {/* Mobile Menu Button */}
