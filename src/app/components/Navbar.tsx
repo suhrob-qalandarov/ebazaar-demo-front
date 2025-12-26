@@ -133,7 +133,7 @@ const Navbar: React.FC = () => {
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: "var(--navbar-bg-transparent)", // Always transparent
+        background: (isScrolled || isMobileMenuOpen) ? "var(--navbar-bg-overlay-light)" : "var(--navbar-bg-transparent)", // Light overlay on scroll/mobile menu, transparent otherwise
         backdropFilter: (isScrolled || isMobileMenuOpen) ? "blur(12px)" : "none", // Blur on scroll or mobile menu open
         boxShadow: "none" // No shadow
       }}
@@ -210,12 +210,12 @@ const Navbar: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute right-0 mt-2 w-40 rounded-lg shadow-lg overflow-hidden z-50"
+                    className="absolute right-0 mt-2 w-40 rounded-lg shadow-lg overflow-hidden"
                     style={{
-                      background: isScrolled 
-                        ? "var(--navbar-bg-scrolled)" 
-                        : "var(--navbar-bg-overlay)",
-                      backdropFilter: "blur(12px)",
+                      backgroundColor: (isScrolled || isMobileMenuOpen) ? "var(--navbar-bg-overlay-light)" : "var(--navbar-bg-overlay-light)", // Always overlay-light like navbar when scrolled
+                      backdropFilter: (isScrolled || isMobileMenuOpen) ? "blur(12px)" : "blur(12px)", // Always blur, same as navbar when scrolled
+                      zIndex: 9999, // Ensure dropdown is above everything
+                      isolation: "isolate", // Create new stacking context
                     }}
                   >
                     {languages.map((lang) => (
@@ -224,11 +224,7 @@ const Navbar: React.FC = () => {
                         onClick={() => handleLanguageChange(lang)}
                         className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold transition-colors ${
                           currentLanguage.code === lang.code
-                            ? isScrolled
-                              ? "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
-                              : "bg-white/20 text-white"
-                            : isScrolled
-                            ? "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                            ? "bg-white/20 text-white"
                             : "text-white/90 hover:bg-white/10"
                         }`}
                       >
