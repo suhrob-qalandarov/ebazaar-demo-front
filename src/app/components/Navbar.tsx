@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Building2 } from "lucide-react";
-import { getStaticContent } from "@/content";
+import { getStaticContent, getNavLinks } from "@/content";
 import type { Locale } from "@/types/locale";
 
 // Flag Components
@@ -82,12 +82,7 @@ const Navbar: React.FC = () => {
   // Use path instead of code, as path directly maps to locale ('uz', 'kr', 'ru')
   const locale: Locale = currentLanguage.path as Locale;
   const content = getStaticContent(locale);
-
-  const navLinks = [
-    { name: content.navbar.about, path: "about" },
-    { name: content.navbar.clients, path: "clients" },
-    { name: content.navbar.team, path: "team" },
-  ];
+  const navLinks = getNavLinks(locale);
 
   // Build full path with locale
   const getNavPath = (path: string) => {

@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import type { Locale } from "@/types/locale";
 import type { DynamicHomeData } from "@/types/dynamic";
-import { getStaticContent } from "@/content";
+import { getStaticContent, getNavLinks } from "@/content";
 
 /** * TypeScript Interfeyslari
  */
@@ -135,12 +135,8 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
                 variants={fadeInUp}
                 className="mb-12 px-8 relative z-10 space-y-10"
               >
-                {[
-                  { name: content.navbar.about, path: "/about" },
-                  { name: content.navbar.clients, path: "/clients" },
-                  { name: content.navbar.team, path: "/team" },
-                ].map((link) => {
-                  const fullPath = locale === 'uz' ? link.path : `/${locale}${link.path}`;
+                {getNavLinks(locale).map((link) => {
+                  const fullPath = locale === 'uz' ? `/${link.path}` : `/${locale}/${link.path}`;
                   return (
                     <motion.a
                       key={link.path}

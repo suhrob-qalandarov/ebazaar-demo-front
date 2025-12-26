@@ -2,7 +2,8 @@ export const uzContent = {
   navbar: {
     about: "Biz haqimizda",
     clients: "Bizning mijozlarimiz",
-    team: "Bizning jamoa"
+    team: "Bizning jamoa",
+    contact: "Biz bilan bog'lanish"
   },
   hero: {
     title: "EverbestLab",

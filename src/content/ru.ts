@@ -2,7 +2,8 @@ export const ruContent = {
   navbar: {
     about: "О нас",
     clients: "Наши клиенты",
-    team: "Наша команда"
+    team: "Наша команда",
+    contact: "Связаться с нами"
   },
   hero: {
     title: "EverbestLab",

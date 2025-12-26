@@ -2,7 +2,8 @@ export const krContent = {
   navbar: {
     about: "Биз ҳақимизда",
     clients: "Бизнинг мижозларимиз",
-    team: "Бизнинг жамоамиз"
+    team: "Бизнинг жамоамиз",
+    contact: "Биз билан боғланиш"
   },
   hero: {
     title: "EverbestLab",
