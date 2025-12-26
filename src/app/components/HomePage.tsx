@@ -82,7 +82,7 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
         variants={fadeIn}
       >
         {/* Mobile/iPad: Full Screen Hero Image */}
-        <div className="lg:hidden relative w-full h-screen">
+        <div className="lg:hidden relative w-full h-[calc(100vh-150px)]">
           <div className="absolute inset-0 z-0">
             <Image
               src="/main/bazar_tashkenta_chorsu.webp"
@@ -90,6 +90,7 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
               fill
               priority
               className="object-cover"
+              style={{ objectPosition: 'left top' }}
               quality={90}
             />
             {/* Overlay gradient for better text readability */}
@@ -102,19 +103,42 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
           </div>
 
           {/* Text overlay on the image */}
-          <div className="absolute inset-0 z-10 flex items-center justify-center">
+          <div className="absolute top-50 inset-0 z-10 flex flex-col items-center justify-center px-4">
             <motion.div
               variants={fadeInUp}
-              className="text-center px-4"
+              className="text-left mb-8 w-full px-4"
             >
-              <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 drop-shadow-2xl">
-                {content.hero.title}
+              <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4 drop-shadow-2xl">
+                {content.hero.controlTitle}
               </h1>
-              <p className="text-xl md:text-2xl text-white/90 font-medium drop-shadow-lg">
-                {content.hero.subtitle}
-              </p>
+              <h1 className="text-4xl md:text-6xl font-extrabold text-white drop-shadow-2xl">
+                {content.hero.solutionTitle}
+              </h1>
+            </motion.div>
+            <motion.div
+              variants={fadeInUp}
+              className="mt-auto mb-20 w-full max-w-md px-4"
+            >
+              <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20">
+                <p className="text-lg font-medium leading-relaxed italic">
+                  "{content.quote_main}"
+                </p>
+              </div>
             </motion.div>
           </div>
+        </div>
+
+        {/* Mobile/iPad: Text below image */}
+        <div 
+          className="lg:hidden w-full h-[150px] px-4 flex items-center"
+          style={{ backgroundColor: 'rgb(15, 23, 42)' }}
+        >
+          <motion.p
+            variants={fadeInUp}
+            className="text-lg text-white leading-relaxed"
+          >
+            <span className="font-bold text-xl text-white">EverbestLab</span> — {content.hero.description}.
+          </motion.p>
         </div>
 
         {/* Desktop: Split Layout with Dark Blue Background */}

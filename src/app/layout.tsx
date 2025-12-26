@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "EverbestLab - Sifatli IT Yechimlar",
   description: "EverbestLab — 2019-yildan buyon O'zbekistonda bizneslarni raqamlashtirish orqali ularning rivojlanishiga hissa qo'shib kelmoqda.",
+  icons: {
+    icon: '/icon.svg',
+  },
 };
 
 export default function RootLayout({
