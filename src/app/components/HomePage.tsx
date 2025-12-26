@@ -227,7 +227,7 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
               >
                 <div className="p-8 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform lg:-rotate-2 w-full min-h-[80px] flex items-center">
                   <p className="text-xl font-medium leading-relaxed italic">
-                    "{content.quote.text}"
+                    "{content.quote_main}"
                   </p>
                 </div>
               </motion.div>
@@ -246,55 +246,89 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
         <section className="text-center space-y-6 pt-8">
           <motion.h1
             variants={fadeInUp}
-            className="text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight"
+            className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight"
           >
-            {content.about.title1} <span className="text-blue-600 dark:text-blue-400">{content.about.title2}</span>
+            {content.about_section.title1} <span className="text-blue-600 dark:text-blue-400">{content.about_section.title2}</span>
           </motion.h1>
         </section>
 
-        {/* --- Main Card Section --- */}
-        <motion.section
-          variants={fadeInUp}
-          className="relative group overflow-hidden rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl p-8 md:p-16 shadow-2xl shadow-blue-500/5"
-        >
-          <div className="absolute top-0 right-0 -z-10 h-80 w-80 bg-blue-500/10 blur-[120px] rounded-full group-hover:bg-blue-500/20 transition-all duration-700" />
+        {/* --- About Section --- */}
+        <div className="grid lg:grid-cols-2 gap-8">
+          <motion.section
+            variants={fadeInUp}
+            className="relative group overflow-hidden rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl p-6 md:p-12 shadow-2xl shadow-blue-500/5"
+          >
+            <div className="absolute top-0 right-0 -z-10 h-80 w-80 bg-blue-500/10 blur-[120px] rounded-full group-hover:bg-blue-500/20 transition-all duration-700" />
 
-          <div className="space-y-8">
-            <motion.div variants={fadeInUp}>
-              <span className="inline-block px-6 py-3 rounded-full bg-blue-500/10 text-blue-500 text-4xl font-semibold border border-blue-500/20 dark:bg-blue-400/10 dark:text-blue-400">
-                {content.mission.title}
-              </span>
-            </motion.div>           
-            <div className="space-y-6 text-slate-600 dark:text-slate-400 text-xl">
-              <p>{content.mission.text1}</p>
-              <p>{content.mission.text2}</p>
+            <div className="space-y-6">
+              <motion.div variants={fadeInUp}>
+                <span className="inline-block px-4 py-2 rounded-full bg-blue-500/10 text-blue-500 text-2xl font-semibold border border-blue-500/20 dark:bg-blue-400/10 dark:text-blue-400">
+                  {content.about.title}
+                </span>
+              </motion.div>           
+              <div className="space-y-4 text-slate-600 dark:text-slate-400 text-lg">
+                <p>{content.about.text1}</p>
+              </div>
             </div>
-            <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform lg:rotate-2">
-              <p className="text-xl font-medium leading-relaxed italic ">
-                "{content.mission.text3}"
-              </p>
+          </motion.section>
+
+          {/* Mission Section */}
+          <motion.section
+            variants={fadeInUp}
+            className="relative group overflow-hidden rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl p-6 md:p-12 shadow-2xl shadow-blue-500/5"
+          >
+            <div className="absolute top-0 right-0 -z-10 h-80 w-80 bg-blue-500/10 blur-[120px] rounded-full group-hover:bg-blue-500/20 transition-all duration-700" />
+
+            <div className="space-y-6">
+              <motion.div variants={fadeInUp}>
+                <span className="inline-block px-4 py-2 rounded-full bg-blue-500/10 text-blue-500 text-2xl font-semibold border border-blue-500/20 dark:bg-blue-400/10 dark:text-blue-400">
+                  {content.mission.title}
+                </span>
+              </motion.div>           
+              <div className="space-y-4 text-slate-600 dark:text-slate-400 text-lg">
+                <p>{content.mission.text1}</p>
+              </div>
             </div>
-          </div>
-        </motion.section>
+          </motion.section>
+        </div>
+
+        {/* Quote Box */}
+        <motion.div
+          variants={fadeInUp}
+          className="p-8 rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform lg:rotate-2"
+        >
+          <p className="text-xl font-medium leading-relaxed italic">
+            "{content.quote_about_section}"
+          </p>
+        </motion.div>
 
         {/* --- Services Grid --- */}
-        <section className="grid md:grid-cols-3 gap-8">
-          <ServiceCard
-            icon={<Code size={28} />}
-            title={content.services.programming.title}
-            description={content.services.programming.description}
-          />
-          <ServiceCard
-            icon={<Globe size={28} />}
-            title={content.services.digitalization.title}
-            description={content.services.digitalization.description}
-          />
-          <ServiceCard
-            icon={<Zap size={28} />}
-            title={content.services.consulting.title}
-            description={content.services.consulting.description}
-          />
-        </section>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <section className="grid md:grid-cols-2 gap-6">
+            <ServiceCard
+              icon={<Code size={24} />}
+              title={content.services.programming.title}
+              description={content.services.programming.description}
+            />
+            <ServiceCard
+              icon={<Globe size={24} />}
+              title={content.services.digitalization.title}
+              description={content.services.digitalization.description}
+            />
+          </section>
+          <section className="grid md:grid-cols-2 gap-6">
+            <ServiceCard
+              icon={<Code size={24} />}
+              title={content.services.programming.title}
+              description={content.services.programming.description}
+            />
+            <ServiceCard
+              icon={<Globe size={24} />}
+              title={content.services.digitalization.title}
+              description={content.services.digitalization.description}
+            />
+          </section>
+        </div>
 
         {/* --- Values --- */}
         <section className="grid sm:grid-cols-3 gap-12 py-10">

@@ -5,6 +5,7 @@ export const uzContent = {
     team: "Bizning jamoa",
     contact: "Biz bilan bog'lanish"
   },
+
   hero: {
     title: "EverbestLab",
     subtitle: "Sifatli IT Yechimlar",
@@ -12,24 +13,33 @@ export const uzContent = {
     controlTitle: "Bozor ustidan to'liq nazorat",
     solutionTitle: "Savdo va boshqaruv uchun ishonchli yechim"
   },
+
+  quote_main: "Bazaar Admin — bizning eng yirik mahsulotimiz bo'lib, bozorlardagi murakkab jarayonlarni sodda va samarali tizimga aylantiradi.",
+
   stats: {
     users: "Foydalanuvchilar",
     projects: "Loyihalar",
     clients: "Mijozlar"
   },
-  about: {
+
+  about_section: {
     title1: "To'liq",
-    title2: "Kompaniya Haqida"
+    title2: "Kompaniya Haqida",
+    title3: "Bizning kompaniyamiz",
   },
+
+  about: {
+    title: "Bizning kompaniyamiz",
+    text1: "Bazaar Admin - bu bizning kompaniyamiz tomonidan ishlab chiqilgan bozor boshqaruvi tizimi bo'lib, bozor faoliyatini to'liq raqamlashtirish va avtomatlashtirish imkonini beradi.",
+  },
+
   mission: {
     title: "Bizning Missiyamiz",
     text1: "Bizning asosiy maqsadimiz - mijozlarimizning biznes jarayonlarini raqamlashtirish va ularga eng zamonaviy texnologiyalar bilan ishlash imkoniyatini yaratish. Har bir loyihada biz sifat, innovatsiya va mijozlar ehtiyojlariga javob berishga e'tibor qaratamiz.",
-    text2: "Bazaar Admin - bu bizning kompaniyamiz tomonidan ishlab chiqilgan bozor boshqaruvi tizimi bo'lib, bozor faoliyatini to'liq raqamlashtirish va avtomatlashtirish imkonini beradi.",
-    text3: "EverbestLab 2019-yildan beri O'zbekistonda faoliyat yuritib kelmoqda. Bizning kompaniyamiz web va mobil ilovalar, korporativ tizimlar, e-commerce platformalar va boshqa zamonaviy IT yechimlarini ishlab chiqishda mutaxassislar jamoasiga ega."
   },
-  quote: {
-    text: "Bazaar Admin — bizning eng yirik mahsulotimiz bo'lib, bozorlardagi murakkab jarayonlarni sodda va samarali tizimga aylantiradi."
-  },
+
+  quote_about_section: "EverbestLab 2019-yildan beri O'zbekistonda faoliyat yuritib kelmoqda. Bizning kompaniyamiz web va mobil ilovalar, korporativ tizimlar, e-commerce platformalar va boshqa zamonaviy IT yechimlarini ishlab chiqishda mutaxassislar jamoasiga ega.",
+  
   services: {
     programming: {
       title: "Dasturlash",
@@ -44,6 +54,7 @@ export const uzContent = {
       description: "Biznesingiz uchun eng to'g'ri texnologik strategiyani tanlashga yordam beramiz."
     }
   },
+
   values: {
     goal: {
       label: "Aniq Maqsad",
@@ -58,6 +69,7 @@ export const uzContent = {
       description: "O'z ishining ustalari bo'lgan mutaxassislar birlashmasi."
     }
   },
+
   contact: {
     title: "Loyihangiz bormi?",
     subtitle: "Keling, uni birgalikda amalga oshiramiz!",
