@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Building2 } from "lucide-react";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,10 +37,17 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <motion.a
             href="/"
-            className="text-2xl font-bold"
+            className="flex items-center gap-2 text-2xl font-bold"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
+            <Building2 
+              className={`w-6 h-6 ${
+                isScrolled 
+                  ? "text-blue-600 dark:text-blue-400" 
+                  : "text-white"
+              }`} 
+            />
             <span className={`bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent ${
               isScrolled ? "" : "text-white"
             }`}>
