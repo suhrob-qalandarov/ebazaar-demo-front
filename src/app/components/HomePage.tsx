@@ -117,22 +117,17 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
 
         {/* Desktop: Split Layout with Dark Blue Background */}
         <div className="hidden lg:flex min-h-screen relative" style={{ backgroundColor: 'rgb(15, 23, 42)' }}>
+          {/* Left Side: Content Box */}
           <div className="max-w-7xl mx-auto w-full px-8 py-16 relative z-10 flex-1">
-            <div className="h-full min-h-[80vh] flex items-center">
-              {/* Left Side: Content */}
+            <div className="h-full min-h-[80vh] flex flex-col justify-start pt-40">
+              {/* Content Box - Logo pastidan */}
               <motion.div
                 variants={fadeInUp}
-                className="space-y-8 text-white max-w-2xl"
+                className="absolute top-1/5 left-8 z-10"
               >
-                <h1 className="text-5xl xl:text-6xl font-extrabold leading-tight">
-                  {content.hero.title}
-                </h1>
-                <p className="text-xl xl:text-2xl text-white/90 font-medium leading-relaxed">
-                  {content.hero.subtitle}
-                </p>
-                <div className="pt-4">
-                  <p className="text-lg text-white/80 leading-relaxed">
-                    <span className="font-bold text-white">EverbestLab</span> — {content.about.description}
+                <div className="p-12 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform lg:-rotate-2 max-w-sm min-h-[200px] flex items-center">
+                  <p className="text-xl font-medium leading-relaxed italic">
+                    "{content.quote.text}"
                   </p>
                 </div>
               </motion.div>
@@ -163,16 +158,17 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-blue-600/20 to-transparent blur-3xl" />
               </div>
               
-              {/* Quote Box on top of image - centered based on image height */}
+              {/* Text Overlay on Image */}
               <motion.div
                 variants={fadeInUp}
-                className="absolute bottom-1/5 -translate-y-1 left-0 right-0 flex justify-center z-10"
+                className="absolute top-40 left-8 z-30 space-y-4"
               >
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform lg:-rotate-2 max-w-[90%]">
-                  <p className="text-xl font-medium leading-relaxed italic">
-                    "{content.quote.text}"
-                  </p>
-                </div>
+                <h1 className="text-5xl xl:text-6xl font-extrabold leading-tight text-white whitespace-nowrap drop-shadow-2xl">
+                  Bozor ustidan to'liq nazorat
+                </h1>
+                <h1 className="text-5xl xl:text-6xl font-extrabold leading-tight text-white drop-shadow-2xl max-w-2xl">
+                  Savdo va boshqaruv uchun ishonchli yechim
+                </h1>
               </motion.div>
             </div>
           </motion.div>
