@@ -6,7 +6,15 @@ export const krContent = {
   },
   hero: {
     title: "EverbestLab",
-    subtitle: "Сифатли IT Ечимлар"
+    subtitle: "Сифатли IT Ечимлар",
+    description: "e-коммерциялар учун бахтли ва содиқ мижозларни олиб келувчи технологик компания",
+    controlTitle: "Бозор устидан тўлиқ назорат",
+    solutionTitle: "Савдо ва бошқарув учун ишончли ечим"
+  },
+  stats: {
+    users: "Фойдаланувчилар",
+    projects: "Лойиҳалар",
+    clients: "Мижозлар"
   },
   about: {
     badge: "Компания ҳақида",

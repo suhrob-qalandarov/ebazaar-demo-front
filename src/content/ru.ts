@@ -6,7 +6,15 @@ export const ruContent = {
   },
   hero: {
     title: "EverbestLab",
-    subtitle: "Качественные IT Решения"
+    subtitle: "Качественные IT Решения",
+    description: "технологическая компания, приносящая счастливых и лояльных клиентов для e-commerce",
+    controlTitle: "Полный контроль над рынком",
+    solutionTitle: "Надежное решение для продаж и управления"
+  },
+  stats: {
+    users: "Пользователи",
+    projects: "Проекты",
+    clients: "Клиенты"
   },
   about: {
     badge: "О компании",

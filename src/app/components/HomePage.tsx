@@ -180,7 +180,7 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
                 className="px-8 relative z-10 w-1/3 mt-50"
               >
                 <p className="text-lg text-white leading-relaxed">
-                  <span className="font-bold text-xl">EverbestLab</span> — e-kommersiyalar uchun baxtli va sodiq mijozlarni olib keluvchi texnologik kompaniya.
+                  <span className="font-bold text-xl">EverbestLab</span> — {content.hero.description}.
                 </p>
               </motion.div>
 
@@ -217,10 +217,10 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
                 className="absolute top-25 left-8 z-30 space-y-4"
               >
                 <h1 className="text-5xl xl:text-6xl font-extrabold leading-tight text-white whitespace-nowrap drop-shadow-2xl">
-                  Bozor ustidan to'liq nazorat
+                  {content.hero.controlTitle}
                 </h1>
                 <h1 className="text-5xl xl:text-6xl font-extrabold leading-tight text-white drop-shadow-2xl max-w-2xl">
-                  Savdo va boshqaruv uchun ishonchli yechim
+                  {content.hero.solutionTitle}
                 </h1>
               </motion.div>
 
@@ -345,19 +345,19 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
               <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
                 {dynamicData.stats.users}
               </div>
-              <div className="text-slate-600 dark:text-slate-400">Foydalanuvchilar</div>
+              <div className="text-slate-600 dark:text-slate-400">{content.stats.users}</div>
             </div>
             <div className="p-8 rounded-2xl bg-blue-50 dark:bg-blue-900/20 text-center">
               <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
                 {dynamicData.stats.projects}
               </div>
-              <div className="text-slate-600 dark:text-slate-400">Loyihalar</div>
+              <div className="text-slate-600 dark:text-slate-400">{content.stats.projects}</div>
             </div>
             <div className="p-8 rounded-2xl bg-blue-50 dark:bg-blue-900/20 text-center">
               <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
                 {dynamicData.stats.clients}
               </div>
-              <div className="text-slate-600 dark:text-slate-400">Mijozlar</div>
+              <div className="text-slate-600 dark:text-slate-400">{content.stats.clients}</div>
             </div>
           </motion.section>
         )}

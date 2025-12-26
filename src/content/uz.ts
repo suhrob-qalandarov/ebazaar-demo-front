@@ -6,7 +6,15 @@ export const uzContent = {
   },
   hero: {
     title: "EverbestLab",
-    subtitle: "Sifatli IT Yechimlar"
+    subtitle: "Sifatli IT Yechimlar",
+    description: "e-kommersiyalar uchun baxtli va sodiq mijozlarni olib keluvchi texnologik kompaniya",
+    controlTitle: "Bozor ustidan to'liq nazorat",
+    solutionTitle: "Savdo va boshqaruv uchun ishonchli yechim"
+  },
+  stats: {
+    users: "Foydalanuvchilar",
+    projects: "Loyihalar",
+    clients: "Mijozlar"
   },
   about: {
     badge: "Kompaniya haqida",
