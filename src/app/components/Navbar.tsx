@@ -212,27 +212,6 @@ const Navbar: React.FC = () => {
             })}
           </div>
 
-          {/* Mobile/iPad Navigation Links - Show in navbar, clicking opens sidebar */}
-          <div className="hidden md:flex lg:hidden items-center space-x-4">
-            {navLinks.map((link) => {
-              const isActive = isActiveLink(link.path);
-              return (
-                <button
-                  key={link.name}
-                  onClick={() => setIsMobileMenuOpen(true)}
-                  className={`text-sm font-semibold transition-colors cursor-pointer ${
-                    isActive
-                      ? "text-blue-600 dark:text-blue-400"
-                      : isScrolled
-                      ? "text-slate-700 dark:text-slate-300"
-                      : "text-white"
-                  }`}
-                >
-                  {link.name}
-                </button>
-              );
-            })}
-          </div>
           
           {/* Language Selector - Right (Desktop) */}
           <div className="hidden lg:block relative language-selector flex-shrink-0">
