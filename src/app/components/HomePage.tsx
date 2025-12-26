@@ -144,14 +144,14 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
             variants={fadeInUp}
             className="hidden lg:block absolute right-0 top-0 w-[62%] h-[95%] rounded-bl-[4rem] overflow-visible shadow-2xl group"
           >
-            <div className="relative w-full h-full">
+            <div className="relative w-full h-full group/image-container">
               <div className="absolute inset-0 rounded-bl-[4rem] overflow-hidden">
                 <Image
                   src="/main/def-3.jpg"
                   alt="Bazar Toshkent Chorsu"
                   fill
                   priority
-                  className="object-cover object-right transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover object-right transition-transform duration-700 group-hover:scale-103 group-hover/image-container:scale-103"
                   style={{ objectPosition: 'left top' }}
                   quality={90}
                 />
@@ -166,9 +166,9 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
               {/* Quote Box on top of image - centered based on image height */}
               <motion.div
                 variants={fadeInUp}
-                className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-center z-10"
+                className="absolute bottom-1/5 -translate-y-1 left-0 right-0 flex justify-center z-10"
               >
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform lg:-rotate-2 max-w-lg">
+                <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform lg:-rotate-2 max-w-[90%]">
                   <p className="text-xl font-medium leading-relaxed italic">
                     "{content.quote.text}"
                   </p>
