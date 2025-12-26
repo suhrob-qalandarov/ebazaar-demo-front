@@ -332,7 +332,7 @@ const Navbar: React.FC = () => {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-              className="fixed left-0 top-0 h-screen w-screen max-w-sm z-50 lg:hidden shadow-2xl"
+              className="fixed left-0 top-0 h-screen w-full z-50 lg:hidden shadow-2xl"
               style={{
                 backgroundColor: "rgba(15, 23, 42, 0.98)",
                 backdropFilter: "blur(12px)"
