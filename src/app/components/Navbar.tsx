@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Building2 } from "lucide-react";
 
@@ -50,16 +51,50 @@ const RussianFlag: React.FC<{ className?: string }> = ({ className }) => (
 );
 
 const Navbar: React.FC = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
-  const [currentLanguage, setCurrentLanguage] = useState("Uzbek");
 
   const languages = [
-    { code: "uz", name: "Uzbek", flag: <UzbekFlag className="w-5 h-4" /> },
-    { code: "uz-cyrl", name: "Ўзбек", flag: <UzbekFlag className="w-5 h-4" /> },
-    { code: "ru", name: "Русский", flag: <RussianFlag className="w-5 h-4" /> },
+    { code: "uz", path: "uz", name: "Uzbek", flag: <UzbekFlag className="w-5 h-4" /> },
+    { code: "uz-cyrl", path: "kr", name: "Ўзбек", flag: <UzbekFlag className="w-5 h-4" /> },
+    { code: "ru", path: "ru", name: "Русский", flag: <RussianFlag className="w-5 h-4" /> },
   ];
+
+  // Get current language from pathname
+  const getCurrentLanguage = () => {
+    const pathSegments = pathname.split('/').filter(Boolean);
+    const locale = pathSegments[0];
+    
+    if (locale === 'kr') return languages.find(l => l.path === 'kr') || languages[1];
+    if (locale === 'ru') return languages.find(l => l.path === 'ru') || languages[2];
+    if (locale === 'uz') return languages.find(l => l.path === 'uz') || languages[0];
+    
+    return languages[0]; // default to uz (no path = /)
+  };
+
+  const currentLanguage = getCurrentLanguage();
+
+  const handleLanguageChange = (lang: typeof languages[0]) => {
+    const pathSegments = pathname.split('/').filter(Boolean);
+    
+    // Remove existing locale if present
+    if (['uz', 'kr', 'ru'].includes(pathSegments[0])) {
+      pathSegments.shift();
+    }
+    
+    // Build new path
+    // Default (uz) - no path prefix, others have /kr or /ru
+    const basePath = pathSegments.length > 0 ? '/' + pathSegments.join('/') : '';
+    const newPath = lang.path === 'uz' 
+      ? basePath || '/'
+      : `/${lang.path}${basePath}`;
+    
+    router.push(newPath);
+    setIsLanguageMenuOpen(false);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,7 +135,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <motion.a
-            href="/"
+            href={currentLanguage.path === 'uz' ? '/' : `/${currentLanguage.path}`}
             className="flex items-center gap-2 text-2xl font-bold"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -163,7 +198,7 @@ const Navbar: React.FC = () => {
                   <ellipse cx="12.5518" cy="12" rx="4" ry="10" stroke="currentColor" strokeWidth="1.5"></ellipse>
                   <path d="M2.55176 12H22.5518" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
                 </svg>
-                <span className="text-sm font-semibold">{currentLanguage}</span>
+                <span className="text-sm font-semibold">{currentLanguage.name}</span>
               </motion.button>
 
               <AnimatePresence>
@@ -184,12 +219,9 @@ const Navbar: React.FC = () => {
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
-                        onClick={() => {
-                          setCurrentLanguage(lang.name);
-                          setIsLanguageMenuOpen(false);
-                        }}
+                        onClick={() => handleLanguageChange(lang)}
                         className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold transition-colors ${
-                          currentLanguage === lang.name
+                          currentLanguage.code === lang.code
                             ? isScrolled
                               ? "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
                               : "bg-white/20 text-white"
@@ -288,11 +320,11 @@ const Navbar: React.FC = () => {
                     <button
                       key={lang.code}
                       onClick={() => {
-                        setCurrentLanguage(lang.name);
+                        handleLanguageChange(lang);
                         setIsMobileMenuOpen(false);
                       }}
                       className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                        currentLanguage === lang.name
+                        currentLanguage.code === lang.code
                           ? isScrolled
                             ? "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
                             : "bg-white/20 text-white"
