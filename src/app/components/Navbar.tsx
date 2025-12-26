@@ -58,6 +58,7 @@ const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const [activeHash, setActiveHash] = useState<string>("");
 
   const languages = [
     { code: "uz", path: "uz", name: "Uzbek", flag: <UzbekFlag className="w-5 h-4" /> },
@@ -87,6 +88,23 @@ const Navbar: React.FC = () => {
     { name: content.navbar.clients, href: "#clients" },
     { name: content.navbar.team, href: "#team" },
   ];
+
+  // Check if link is active based on hash
+  const isActiveLink = (href: string) => {
+    return activeHash === href;
+  };
+
+  // Update active hash on mount and hash change
+  useEffect(() => {
+    const updateHash = () => {
+      setActiveHash(window.location.hash);
+    };
+    
+    updateHash(); // Initial hash
+    
+    window.addEventListener('hashchange', updateHash);
+    return () => window.removeEventListener('hashchange', updateHash);
+  }, []);
 
   const handleLanguageChange = (lang: typeof languages[0]) => {
     const pathSegments = pathname.split('/').filter(Boolean);
@@ -157,23 +175,27 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Navigation - Center */}
           <div className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
-            {navLinks.map((link, index) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                className={`text-sm font-semibold transition-colors ${
-                  isScrolled
-                    ? "text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
-                    : "text-white hover:text-blue-200"
-                }`}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.3 }}
-                whileHover={{ y: -2 }}
-              >
-                {link.name}
-              </motion.a>
-            ))}
+            {navLinks.map((link, index) => {
+              const isActive = isActiveLink(link.href);
+              return (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  className={`text-sm font-semibold transition-colors ${
+                    isActive
+                      ? "text-blue-600 dark:text-blue-400 hover:text-blue-300"
+                      : isScrolled
+                      ? "text-slate-700 dark:text-slate-300"
+                      : "text-white hover:text-blue-200"
+                  }`}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 + 0.3 }}
+                >
+                  {link.name}
+                </motion.a>
+              );
+            })}
           </div>
           
           {/* Language Selector - Right */}
@@ -269,21 +291,25 @@ const Navbar: React.FC = () => {
             }}
           >
             <div className="px-4 py-6 space-y-4">
-              {navLinks.map((link) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  className={`block py-3 text-base font-semibold transition-colors ${
-                    isScrolled
-                      ? "text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
-                      : "text-white hover:text-blue-200"
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  whileHover={{ x: 5 }}
-                >
-                  {link.name}
-                </motion.a>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = isActiveLink(link.href);
+                return (
+                  <motion.a
+                    key={link.name}
+                    href={link.href}
+                    className={`block py-3 text-base font-semibold transition-colors ${
+                      isActive
+                        ? "text-blue-600 dark:text-blue-400"
+                        : isScrolled
+                        ? "text-slate-700 dark:text-slate-300"
+                        : "text-white"
+                    }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </motion.a>
+                );
+              })}
               
               {/* Mobile Language Selector */}
               <div className="pt-4 border-t border-white/20">
