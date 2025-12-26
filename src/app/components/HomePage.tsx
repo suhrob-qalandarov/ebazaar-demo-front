@@ -142,15 +142,16 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
           {/* Right Side: Image Box - Positioned to touch right and top edges (from navbar) */}
           <motion.div
             variants={fadeInUp}
-            className="hidden lg:block absolute right-0 top-0 w-[50%] h-full rounded-bl-2xl overflow-hidden shadow-2xl group"
+            className="hidden lg:block absolute right-0 top-0 w-[62%] h-[95%] rounded-bl-[4rem] overflow-hidden shadow-2xl group"
           >
             <div className="relative w-full h-full">
               <Image
-                src="/main/bazar_tashkenta_chorsu.webp"
+                src="/main/def-3.jpg"
                 alt="Bazar Toshkent Chorsu"
                 fill
                 priority
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-cover object-right transition-transform duration-700 group-hover:scale-105"
+                style={{ objectPosition: 'left top' }}
                 quality={90}
               />
               {/* Gradient overlay from left to create depth */}
