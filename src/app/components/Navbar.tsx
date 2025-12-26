@@ -148,15 +148,9 @@ const Navbar: React.FC = () => {
             whileTap={{ scale: 0.95 }}
           >
             <Building2 
-              className={`w-6 h-6 ${
-                isScrolled 
-                  ? "text-blue-600 dark:text-blue-400" 
-                  : "text-white"
-              }`} 
+              className="w-6 h-6 text-white"
             />
-            <span className={`bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent ${
-              isScrolled ? "" : "text-white"
-            }`}>
+            <span className="text-white">
               Bazaar Admin
             </span>
           </motion.a>
