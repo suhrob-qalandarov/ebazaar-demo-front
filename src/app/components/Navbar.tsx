@@ -134,7 +134,7 @@ const Navbar: React.FC = () => {
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
         background: "var(--navbar-bg-transparent)", // Always transparent
-        backdropFilter: isScrolled ? "blur(12px)" : "none", // Blur only on scroll
+        backdropFilter: (isScrolled || isMobileMenuOpen) ? "blur(12px)" : "none", // Blur on scroll or mobile menu open
         boxShadow: "none" // No shadow
       }}
     >
@@ -268,10 +268,8 @@ const Navbar: React.FC = () => {
             transition={{ duration: 0.3 }}
             className="md:hidden overflow-hidden"
             style={{
-              background: isScrolled 
-                ? "var(--navbar-bg-scrolled)" 
-                : "var(--navbar-bg-overlay-light)",
-              backdropFilter: "blur(12px)" // Mobile menu always has blur
+              background: "var(--navbar-bg-transparent)", // Same as navbar - always transparent
+              backdropFilter: "blur(12px)" // Mobile menu always has blur - same as navbar when open
             }}
           >
             <div className="px-4 py-6 space-y-4">
