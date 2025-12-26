@@ -133,8 +133,8 @@ const Navbar: React.FC = () => {
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: (isScrolled || isMobileMenuOpen) ? "var(--navbar-bg-overlay-light)" : "var(--navbar-bg-transparent)", // Light overlay on scroll/mobile menu, transparent otherwise
-        backdropFilter: (isScrolled || isMobileMenuOpen) ? "blur(12px)" : "none", // Blur on scroll or mobile menu open
+        background: isScrolled ? "rgba(15, 23, 42, 0.5)" : "transparent",
+        backdropFilter: isScrolled ? "blur(4px)" : (isMobileMenuOpen ? "blur(12px)" : "none"),
         boxShadow: "none" // No shadow
       }}
     >
@@ -212,10 +212,10 @@ const Navbar: React.FC = () => {
                     transition={{ duration: 0.2 }}
                     className="absolute right-0 mt-2 w-40 rounded-lg shadow-lg overflow-hidden"
                     style={{
-                      backgroundColor: (isScrolled || isMobileMenuOpen) ? "var(--navbar-bg-overlay-light)" : "var(--navbar-bg-overlay-light)", // Always overlay-light like navbar when scrolled
-                      backdropFilter: (isScrolled || isMobileMenuOpen) ? "blur(12px)" : "blur(12px)", // Always blur, same as navbar when scrolled
-                      zIndex: 9999, // Ensure dropdown is above everything
-                      isolation: "isolate", // Create new stacking context
+                      backgroundColor: "rgba(15, 23, 42, 0.5)",
+                      backdropFilter: "blur(12px)",
+                      zIndex: 9999,
+                      isolation: "isolate",
                     }}
                   >
                     {languages.map((lang) => (
