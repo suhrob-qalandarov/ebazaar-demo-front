@@ -58,7 +58,6 @@ const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
-  const [activeHash, setActiveHash] = useState<string>("");
 
   const languages = [
     { code: "uz", path: "uz", name: "Uzbek", flag: <UzbekFlag className="w-5 h-4" /> },
@@ -84,27 +83,29 @@ const Navbar: React.FC = () => {
   const content = getStaticContent(locale);
 
   const navLinks = [
-    { name: content.navbar.about, href: "#about" },
-    { name: content.navbar.clients, href: "#clients" },
-    { name: content.navbar.team, href: "#team" },
+    { name: content.navbar.about, path: "about" },
+    { name: content.navbar.clients, path: "clients" },
+    { name: content.navbar.team, path: "team" },
   ];
 
-  // Check if link is active based on hash
-  const isActiveLink = (href: string) => {
-    return activeHash === href;
+  // Build full path with locale
+  const getNavPath = (path: string) => {
+    const basePath = locale === 'uz' ? '' : `/${locale}`;
+    return `${basePath}/${path}`;
   };
 
-  // Update active hash on mount and hash change
-  useEffect(() => {
-    const updateHash = () => {
-      setActiveHash(window.location.hash);
-    };
-    
-    updateHash(); // Initial hash
-    
-    window.addEventListener('hashchange', updateHash);
-    return () => window.removeEventListener('hashchange', updateHash);
-  }, []);
+  // Handle navigation to path
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    e.preventDefault();
+    const fullPath = getNavPath(path);
+    router.push(fullPath);
+  };
+
+  // Check if link is active based on current pathname
+  const isActiveLink = (path: string) => {
+    const fullPath = getNavPath(path);
+    return pathname === fullPath || pathname.endsWith(`/${path}`);
+  };
 
   const handleLanguageChange = (lang: typeof languages[0]) => {
     const pathSegments = pathname.split('/').filter(Boolean);
@@ -126,11 +127,11 @@ const Navbar: React.FC = () => {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleNavbarScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleNavbarScroll);
+    return () => window.removeEventListener("scroll", handleNavbarScroll);
   }, []);
 
   useEffect(() => {
@@ -176,12 +177,14 @@ const Navbar: React.FC = () => {
           {/* Desktop Navigation - Center */}
           <div className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
             {navLinks.map((link, index) => {
-              const isActive = isActiveLink(link.href);
+              const isActive = isActiveLink(link.path);
+              const fullPath = getNavPath(link.path);
               return (
                 <motion.a
                   key={link.name}
-                  href={link.href}
-                  className={`text-sm font-semibold transition-colors ${
+                  href={fullPath}
+                  onClick={(e) => handleNavClick(e, link.path)}
+                  className={`text-sm font-semibold transition-colors cursor-pointer ${
                     isActive
                       ? "text-blue-600 dark:text-blue-400 hover:text-blue-300"
                       : isScrolled
@@ -292,19 +295,23 @@ const Navbar: React.FC = () => {
           >
             <div className="px-4 py-6 space-y-4">
               {navLinks.map((link) => {
-                const isActive = isActiveLink(link.href);
+                const isActive = isActiveLink(link.path);
+                const fullPath = getNavPath(link.path);
                 return (
                   <motion.a
                     key={link.name}
-                    href={link.href}
-                    className={`block py-3 text-base font-semibold transition-colors ${
+                    href={fullPath}
+                    onClick={(e) => {
+                      handleNavClick(e, link.path);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className={`block py-3 text-base font-semibold transition-colors cursor-pointer ${
                       isActive
                         ? "text-blue-600 dark:text-blue-400"
                         : isScrolled
                         ? "text-slate-700 dark:text-slate-300"
                         : "text-white"
                     }`}
-                    onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.name}
                   </motion.a>
