@@ -248,23 +248,12 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
         variants={containerVariants}
       >
         <section className="text-center space-y-6 pt-8">
-          <motion.div variants={fadeInUp}>
-            <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-500 text-sm font-semibold border border-blue-500/20 dark:bg-blue-400/10 dark:text-blue-400">
-              {content.about.badge}
-            </span>
-          </motion.div>
           <motion.h1
             variants={fadeInUp}
             className="text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight"
           >
-            {content.about.title} <span className="text-blue-600 dark:text-blue-400">{content.about.titleHighlight}</span>
+            {content.about.title1} <span className="text-blue-600 dark:text-blue-400">{content.about.title2}</span>
           </motion.h1>
-          <motion.p
-            variants={fadeInUp}
-            className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed"
-          >
-            <span className="font-bold text-slate-900 dark:text-slate-200">EverbestLab</span> — {content.about.description}
-          </motion.p>
         </section>
 
         {/* --- Main Card Section --- */}
@@ -274,24 +263,19 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
         >
           <div className="absolute top-0 right-0 -z-10 h-80 w-80 bg-blue-500/10 blur-[120px] rounded-full group-hover:bg-blue-500/20 transition-all duration-700" />
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <h2 className="text-4xl font-bold text-slate-900 dark:text-white">{content.mission.title}</h2>
-              <div className="space-y-4 text-slate-600 dark:text-slate-400 text-lg">
-                <p>{content.mission.text1}</p>
-                <p>{content.mission.text2}</p>
-              </div>
-              <motion.button
-                whileHover={{ x: 5 }}
-                className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold group"
-              >
-                {content.mission.buttonText} <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </motion.button>
+          <div className="space-y-8">
+            <motion.div variants={fadeInUp}>
+              <span className="inline-block px-6 py-3 rounded-full bg-blue-500/10 text-blue-500 text-4xl font-semibold border border-blue-500/20 dark:bg-blue-400/10 dark:text-blue-400">
+                {content.mission.title}
+              </span>
+            </motion.div>           
+            <div className="space-y-6 text-slate-600 dark:text-slate-400 text-xl">
+              <p>{content.mission.text1}</p>
+              <p>{content.mission.text2}</p>
             </div>
-
-            <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform lg:rotate-2">
+            <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20">
               <p className="text-xl font-medium leading-relaxed italic">
-                "{content.quote.text}"
+                "{content.mission.text3}"
               </p>
             </div>
           </div>

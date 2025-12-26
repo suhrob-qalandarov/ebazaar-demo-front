@@ -17,16 +17,14 @@ export const uzContent = {
     clients: "Mijozlar"
   },
   about: {
-    badge: "Kompaniya haqida",
-    title: "Sifatli",
-    titleHighlight: "IT Yechimlar",
-    description: "2019-yildan buyon O'zbekistonda bizneslarni raqamlashtirish orqali ularning rivojlanishiga hissa qo'shib kelmoqda."
+    title1: "To'liq",
+    title2: "Kompaniya Haqida"
   },
   mission: {
     title: "Bizning Missiyamiz",
-    text1: "Biznes jarayonlarini raqamlashtirish nafaqat vaqtni tejash, balki shaffoflikni ta'minlash demakdir.",
-    text2: "Har bir loyihada sifat, innovatsiya va mijoz ehtiyojlarini birinchi o'ringa qo'yamiz.",
-    buttonText: "Biz haqimizda ko'proq"
+    text1: "Bizning asosiy maqsadimiz - mijozlarimizning biznes jarayonlarini raqamlashtirish va ularga eng zamonaviy texnologiyalar bilan ishlash imkoniyatini yaratish. Har bir loyihada biz sifat, innovatsiya va mijozlar ehtiyojlariga javob berishga e'tibor qaratamiz.",
+    text2: "Bazaar Admin - bu bizning kompaniyamiz tomonidan ishlab chiqilgan bozor boshqaruvi tizimi bo'lib, bozor faoliyatini to'liq raqamlashtirish va avtomatlashtirish imkonini beradi.",
+    text3: "EverbestLab 2019-yildan beri O'zbekistonda faoliyat yuritib kelmoqda. Bizning kompaniyamiz web va mobil ilovalar, korporativ tizimlar, e-commerce platformalar va boshqa zamonaviy IT yechimlarini ishlab chiqishda mutaxassislar jamoasiga ega."
   },
   quote: {
     text: "Bazaar Admin — bizning eng yirik mahsulotimiz bo'lib, bozorlardagi murakkab jarayonlarni sodda va samarali tizimga aylantiradi."
