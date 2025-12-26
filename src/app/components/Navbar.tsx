@@ -58,6 +58,7 @@ const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const languages = [
     { code: "uz", path: "uz", name: "Uzbek", flag: <UzbekFlag className="w-5 h-4" /> },
@@ -134,6 +135,16 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleNavbarScroll);
   }, []);
 
+  // Check if mobile view
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
@@ -152,8 +163,8 @@ const Navbar: React.FC = () => {
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: isScrolled ? "rgba(15, 23, 42, 0.5)" : "transparent",
-        backdropFilter: isScrolled ? "blur(4px)" : (isMobileMenuOpen ? "blur(12px)" : "none"),
+        background: (isScrolled || isMobileMenuOpen) ? "rgba(15, 23, 42, 0.5)" : "transparent", // Visible on scroll or mobile menu open, transparent by default
+        backdropFilter: (isScrolled || isMobileMenuOpen) ? "blur(12px)" : "none", // Blur on scroll or mobile menu open
         boxShadow: "none" // No shadow
       }}
     >
@@ -289,8 +300,8 @@ const Navbar: React.FC = () => {
             transition={{ duration: 0.3 }}
             className="md:hidden overflow-hidden"
             style={{
-              background: "var(--navbar-bg-transparent)", // Same as navbar - always transparent
-              backdropFilter: "blur(12px)" // Mobile menu always has blur - same as navbar when open
+              background: "rgba(15, 23, 42, 0.5)", // Always visible background (same as navbar when scrolled)
+              backdropFilter: "blur(12px)" // Always blur
             }}
           >
             <div className="px-4 py-6 space-y-4">
