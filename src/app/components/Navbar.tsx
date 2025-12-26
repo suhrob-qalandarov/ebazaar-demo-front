@@ -123,17 +123,23 @@ const Navbar: React.FC = () => {
   };
 
   useEffect(() => {
+    // Only check scroll for desktop (not mobile)
+    if (isMobile) {
+      setIsScrolled(false); // Mobile da scroll tekshirish yo'q
+      return;
+    }
+    
     const handleNavbarScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleNavbarScroll);
     return () => window.removeEventListener("scroll", handleNavbarScroll);
-  }, []);
+  }, [isMobile]);
 
-  // Check if mobile view
+  // Check if mobile/tablet view (including iPad)
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768); // md breakpoint
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint (includes iPad)
     };
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -168,9 +174,21 @@ const Navbar: React.FC = () => {
         <div 
           className="mx-4 mt-4 rounded-2xl px-4 py-3 flex items-center justify-between"
           style={{
-            backgroundColor: isScrolled ? "rgba(255, 255, 255, 0.9)" : "transparent",
-            backdropFilter: isScrolled ? "blur(20px)" : "none",
-            boxShadow: isScrolled ? "0 8px 32px rgba(0, 0, 0, 0.1)" : "none",
+            backgroundColor: isMobile 
+              ? "rgba(255, 255, 255, 0.95)" 
+              : isScrolled 
+                ? "rgba(255, 255, 255, 0.9)" 
+                : "transparent",
+            backdropFilter: isMobile 
+              ? "blur(20px)" 
+              : isScrolled 
+                ? "blur(20px)" 
+                : "none",
+            boxShadow: isMobile 
+              ? "0 8px 32px rgba(0, 0, 0, 0.1)" 
+              : isScrolled 
+                ? "0 8px 32px rgba(0, 0, 0, 0.1)" 
+                : "none",
             transition: "all 0.3s ease"
           }}
         >
@@ -180,11 +198,23 @@ const Navbar: React.FC = () => {
             className="flex items-center gap-2 text-xl font-bold flex-shrink-0"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            style={{ color: isScrolled ? "rgb(15, 23, 42)" : "rgb(255, 255, 255)" }}
+            style={{ 
+              color: isMobile 
+                ? "rgb(15, 23, 42)" 
+                : isScrolled 
+                  ? "rgb(15, 23, 42)" 
+                  : "rgb(255, 255, 255)" 
+            }}
           >
             <Building2 
               className="w-5 h-5"
-              style={{ color: isScrolled ? "rgb(15, 23, 42)" : "rgb(255, 255, 255)" }}
+              style={{ 
+                color: isMobile 
+                  ? "rgb(15, 23, 42)" 
+                  : isScrolled 
+                    ? "rgb(15, 23, 42)" 
+                    : "rgb(255, 255, 255)" 
+              }}
             />
             <span>
               Bazaar Admin
@@ -227,7 +257,11 @@ const Navbar: React.FC = () => {
               onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
               className="flex items-center gap-2 px-3 py-2 rounded-lg transition-colors"
               style={{
-                color: isScrolled ? "rgb(15, 23, 42)" : "rgb(255, 255, 255)"
+                color: isMobile 
+                  ? "rgb(15, 23, 42)" 
+                  : isScrolled 
+                    ? "rgb(15, 23, 42)" 
+                    : "rgb(255, 255, 255)"
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -288,7 +322,7 @@ const Navbar: React.FC = () => {
             className="lg:hidden p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
-            style={{ color: isScrolled ? "rgb(15, 23, 42)" : "rgb(255, 255, 255)" }}
+            style={{ color: "rgb(15, 23, 42)" }}
           >
               {isMobileMenuOpen ? (
                 <X size={20} />
