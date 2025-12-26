@@ -131,11 +131,13 @@ const Navbar: React.FC = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl shadow-lg"
-          : "bg-transparent"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl"
+      style={{
+        background: isScrolled 
+          ? "var(--navbar-bg-scrolled)" 
+          : "var(--navbar-bg-transparent)",
+        boxShadow: isScrolled ? "0 10px 15px -3px rgba(0, 0, 0, 0.1)" : "none"
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
@@ -218,8 +220,8 @@ const Navbar: React.FC = () => {
                     className="absolute right-0 mt-2 w-40 rounded-lg shadow-lg overflow-hidden z-50"
                     style={{
                       background: isScrolled 
-                        ? "rgba(255, 255, 255, 0.95)" 
-                        : "rgba(0, 0, 0, 0.8)",
+                        ? "var(--navbar-bg-scrolled)" 
+                        : "var(--navbar-bg-overlay)",
                       backdropFilter: "blur(12px)",
                     }}
                   >
@@ -271,11 +273,12 @@ const Navbar: React.FC = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className={`md:hidden overflow-hidden ${
-              isScrolled
-                ? "bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl"
-                : "bg-black/50 backdrop-blur-xl"
-            }`}
+            className="md:hidden overflow-hidden backdrop-blur-xl"
+            style={{
+              background: isScrolled 
+                ? "var(--navbar-bg-scrolled)" 
+                : "var(--navbar-bg-overlay-light)"
+            }}
           >
             <div className="px-4 py-6 space-y-4">
               {navLinks.map((link) => (

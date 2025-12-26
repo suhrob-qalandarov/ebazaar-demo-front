@@ -89,7 +89,12 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
             quality={90}
           />
           {/* Overlay gradient for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+          <div 
+            className="absolute inset-0" 
+            style={{
+              background: 'linear-gradient(to bottom, var(--hero-overlay-start), var(--hero-overlay-middle), var(--hero-overlay-end))'
+            }}
+          />
         </div>
 
         {/* Optional: Add some text overlay on the image if needed */}
