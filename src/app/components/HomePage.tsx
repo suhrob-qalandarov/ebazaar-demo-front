@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { motion, Variants } from "framer-motion";
 import {
   Code, Globe, Zap, Target,
@@ -68,6 +69,7 @@ const fadeIn: Variants = {
 };
 
 const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
+  const router = useRouter();
   const content = getStaticContent(locale);
 
   return (
@@ -128,12 +130,40 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
                 {/* SVG ni shu yerga copy-paste qiling */}
               </motion.div>
 
-              {/* Text above quote box */}
+              {/* Navigation Links */}
               <motion.div
                 variants={fadeInUp}
-                className="mb-8 text-white max-w-sm px-8 relative z-10"
+                className="mb-12 px-8 relative z-10 space-y-10"
               >
-                <p className="text-lg leading-relaxed">
+                {[
+                  { name: content.navbar.about, path: "/about" },
+                  { name: content.navbar.clients, path: "/clients" },
+                  { name: content.navbar.team, path: "/team" },
+                ].map((link) => {
+                  const fullPath = locale === 'uz' ? link.path : `/${locale}${link.path}`;
+                  return (
+                    <a
+                      key={link.path}
+                      href={fullPath}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        router.push(fullPath);
+                      }}
+                      className="flex items-center gap-2 text-white text-lg font-semibold hover:text-blue-400 transition-colors cursor-pointer"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                      <span>{link.name}</span>
+                    </a>
+                  );
+                })}
+              </motion.div>
+
+              {/* Text below navlinks */}
+              <motion.div
+                variants={fadeInUp}
+                className="px-8 relative z-10 w-1/3 mt-50"
+              >
+                <p className="text-lg text-white leading-relaxed">
                   <span className="font-bold text-xl">EverbestLab</span> — e-kommersiyalar uchun baxtli va sodiq mijozlarni olib keluvchi texnologik kompaniya.
                 </p>
               </motion.div>
