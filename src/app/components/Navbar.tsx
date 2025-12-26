@@ -186,7 +186,7 @@ const Navbar: React.FC = () => {
           </motion.a>
 
           {/* Desktop Navigation - Center */}
-          <div className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
+          <div className="hidden lg:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
             {navLinks.map((link, index) => {
               const isActive = isActiveLink(link.path);
               const fullPath = getNavPath(link.path);
@@ -211,9 +211,31 @@ const Navbar: React.FC = () => {
               );
             })}
           </div>
+
+          {/* Mobile/iPad Navigation Links - Show in navbar, clicking opens sidebar */}
+          <div className="hidden md:flex lg:hidden items-center space-x-4">
+            {navLinks.map((link) => {
+              const isActive = isActiveLink(link.path);
+              return (
+                <button
+                  key={link.name}
+                  onClick={() => setIsMobileMenuOpen(true)}
+                  className={`text-sm font-semibold transition-colors cursor-pointer ${
+                    isActive
+                      ? "text-blue-600 dark:text-blue-400"
+                      : isScrolled
+                      ? "text-slate-700 dark:text-slate-300"
+                      : "text-white"
+                  }`}
+                >
+                  {link.name}
+                </button>
+              );
+            })}
+          </div>
           
-          {/* Language Selector - Right */}
-          <div className="hidden md:block relative language-selector flex-shrink-0">
+          {/* Language Selector - Right (Desktop) */}
+          <div className="hidden lg:block relative language-selector flex-shrink-0">
               <motion.button
                 onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
@@ -275,9 +297,9 @@ const Navbar: React.FC = () => {
               </AnimatePresence>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile/iPad: Menu Button */}
           <button
-            className={`md:hidden p-2 rounded-lg transition-colors ${
+            className={`lg:hidden p-2 rounded-lg transition-colors ${
               isScrolled
                 ? "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                 : "text-white hover:bg-white/10"
@@ -290,100 +312,107 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile/iPad Sidebar Drawer */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden"
-            style={{
-              background: "rgba(15, 23, 42, 0.5)", // Always visible background (same as navbar when scrolled)
-              backdropFilter: "blur(12px)" // Always blur
-            }}
-          >
-            <div className="px-4 py-6 space-y-4">
-              {navLinks.map((link) => {
-                const isActive = isActiveLink(link.path);
-                const fullPath = getNavPath(link.path);
-                return (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+
+            {/* Sidebar */}
+            <motion.div
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              className="fixed left-0 top-0 h-screen w-screen max-w-sm z-50 lg:hidden shadow-2xl"
+              style={{
+                backgroundColor: "rgba(15, 23, 42, 0.98)",
+                backdropFilter: "blur(12px)"
+              }}
+            >
+              <div className="flex flex-col h-screen">
+                {/* Header: Logo and Close Button */}
+                <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 flex-shrink-0">
                   <motion.a
-                    key={link.name}
-                    href={fullPath}
-                    onClick={(e) => {
-                      handleNavClick(e, link.path);
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className={`block py-3 text-base font-semibold transition-colors cursor-pointer ${
-                      isActive
-                        ? "text-blue-600 dark:text-blue-400"
-                        : isScrolled
-                        ? "text-slate-700 dark:text-slate-300"
-                        : "text-white"
-                    }`}
+                    href={currentLanguage.path === 'uz' ? '/' : `/${currentLanguage.path}`}
+                    className="flex items-center gap-2 text-2xl font-bold"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    {link.name}
+                    <Building2 className="w-6 h-6 text-white" />
+                    <span className="text-white">Bazaar Admin</span>
                   </motion.a>
-                );
-              })}
-              
-              {/* Mobile Language Selector */}
-              <div className="pt-4 border-t border-white/20">
-                <div className="flex items-center gap-3 mb-3">
-                  <svg 
-                    width="25" 
-                    height="24" 
-                    viewBox="0 0 25 24" 
-                    fill="none" 
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`w-5 h-5 ${
-                      isScrolled
-                        ? "text-slate-700 dark:text-slate-300"
-                        : "text-white"
-                    }`}
+                  <button
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="p-2 rounded-lg text-white hover:bg-white/10 transition-colors"
+                    aria-label="Close menu"
                   >
-                    <circle cx="12.5518" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"></circle>
-                    <ellipse cx="12.5518" cy="12" rx="4" ry="10" stroke="currentColor" strokeWidth="1.5"></ellipse>
-                    <path d="M2.55176 12H22.5518" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                  </svg>
-                  <span className={`text-sm font-semibold ${
-                    isScrolled
-                      ? "text-slate-700 dark:text-slate-300"
-                      : "text-white"
-                  }`}>
-                    Til
-                  </span>
+                    <X size={24} />
+                  </button>
                 </div>
-                <div className="space-y-2">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => {
-                        handleLanguageChange(lang);
-                        setIsMobileMenuOpen(false);
-                      }}
-                      className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                        currentLanguage.code === lang.code
-                          ? isScrolled
-                            ? "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
-                            : "bg-white/20 text-white"
-                          : isScrolled
-                          ? "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
-                          : "text-white/80 hover:bg-white/10"
-                      }`}
-                    >
-                      <span className="flex items-center justify-center rounded-sm overflow-hidden" style={{ borderRadius: '4px', width: '20px', height: '15px' }}>
-                        {lang.flag}
-                      </span>
-                      <span>{lang.name}</span>
-                    </button>
-                  ))}
+
+                {/* Nav Links - Centered */}
+                <div className="flex-1 flex flex-col items-center justify-center space-y-6 px-6 overflow-y-auto">
+                  {navLinks.map((link) => {
+                    const isActive = isActiveLink(link.path);
+                    const fullPath = getNavPath(link.path);
+                    return (
+                      <motion.a
+                        key={link.name}
+                        href={fullPath}
+                        onClick={(e) => {
+                          handleNavClick(e, link.path);
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className={`block py-3 text-lg font-semibold transition-colors cursor-pointer text-center w-full ${
+                          isActive
+                            ? "text-blue-600 dark:text-blue-400"
+                            : "text-white hover:text-blue-400"
+                        }`}
+                        whileHover={{ x: 5 }}
+                      >
+                        {link.name}
+                      </motion.a>
+                    );
+                  })}
+                </div>
+
+                {/* Languages - Bottom Row */}
+                <div className="px-6 py-6 border-t border-white/10 flex-shrink-0">
+                  <div className="flex items-center justify-center gap-2 flex-wrap">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          handleLanguageChange(lang);
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                          currentLanguage.code === lang.code
+                            ? "bg-white/20 text-white"
+                            : "text-white/70 hover:bg-white/10 hover:text-white"
+                        }`}
+                      >
+                        <span className="flex items-center justify-center rounded-sm overflow-hidden" style={{ borderRadius: '4px', width: '20px', height: '15px' }}>
+                          {lang.flag}
+                        </span>
+                        <span>{lang.name}</span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.nav>
