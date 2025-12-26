@@ -120,12 +120,30 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
           {/* Left Side: Content Box */}
           <div className="max-w-7xl mx-auto w-full px-8 py-16 relative z-10 flex-1">
             <div className="h-full min-h-[80vh] flex flex-col justify-start pt-40">
+              {/* SVG uchun joy */}
+              <motion.div
+                variants={fadeInUp}
+                className="mb-6 px-8 relative z-10"
+              >
+                {/* SVG ni shu yerga copy-paste qiling */}
+              </motion.div>
+
+              {/* Text above quote box */}
+              <motion.div
+                variants={fadeInUp}
+                className="mb-8 text-white max-w-sm px-8 relative z-10"
+              >
+                <p className="text-lg leading-relaxed">
+                  <span className="font-bold text-xl">EverbestLab</span> — e-kommersiyalar uchun baxtli va sodiq mijozlarni olib keluvchi texnologik kompaniya.
+                </p>
+              </motion.div>
+
               {/* Content Box - Logo pastidan */}
               <motion.div
                 variants={fadeInUp}
-                className="absolute top-1/5 left-8 z-10"
+                className="relative left-5 z-10"
               >
-                <div className="p-12 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform lg:-rotate-2 max-w-sm min-h-[200px] flex items-center">
+                <div className="p-12 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform lg:-rotate-2 max-w-[370px] min-h-[200px] flex items-center">
                   <p className="text-xl font-medium leading-relaxed italic">
                     "{content.quote.text}"
                   </p>
