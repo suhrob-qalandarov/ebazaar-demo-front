@@ -138,17 +138,6 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
                 </p>
               </motion.div>
 
-              {/* Content Box - Logo pastidan */}
-              <motion.div
-                variants={fadeInUp}
-                className="relative left-5 z-10"
-              >
-                <div className="p-12 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform lg:-rotate-2 max-w-[370px] min-h-[200px] flex items-center">
-                  <p className="text-xl font-medium leading-relaxed italic">
-                    "{content.quote.text}"
-                  </p>
-                </div>
-              </motion.div>
             </div>
           </div>
 
@@ -179,7 +168,7 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
               {/* Text Overlay on Image */}
               <motion.div
                 variants={fadeInUp}
-                className="absolute top-40 left-8 z-30 space-y-4"
+                className="absolute top-25 left-8 z-30 space-y-4"
               >
                 <h1 className="text-5xl xl:text-6xl font-extrabold leading-tight text-white whitespace-nowrap drop-shadow-2xl">
                   Bozor ustidan to'liq nazorat
@@ -187,6 +176,18 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
                 <h1 className="text-5xl xl:text-6xl font-extrabold leading-tight text-white drop-shadow-2xl max-w-2xl">
                   Savdo va boshqaruv uchun ishonchli yechim
                 </h1>
+              </motion.div>
+
+              {/* Quote Box on Image - Bottom */}
+              <motion.div
+                variants={fadeInUp}
+                className="absolute bottom-50 left-8 right-8 z-30"
+              >
+                <div className="p-8 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform lg:-rotate-2 w-full min-h-[80px] flex items-center">
+                  <p className="text-xl font-medium leading-relaxed italic">
+                    "{content.quote.text}"
+                  </p>
+                </div>
               </motion.div>
             </div>
           </motion.div>
