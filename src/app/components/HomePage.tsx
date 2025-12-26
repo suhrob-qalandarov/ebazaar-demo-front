@@ -273,8 +273,8 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
               <p>{content.mission.text1}</p>
               <p>{content.mission.text2}</p>
             </div>
-            <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20">
-              <p className="text-xl font-medium leading-relaxed italic">
+            <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform lg:rotate-2">
+              <p className="text-xl font-medium leading-relaxed italic ">
                 "{content.mission.text3}"
               </p>
             </div>
