@@ -72,43 +72,94 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
 
   return (
     <div className="min-h-screen bg-transparent">
-      {/* --- Full Screen Hero Image Section --- */}
+      {/* --- Hero Section: Mobile/iPad (Full Screen Image) & Desktop (Split Layout) --- */}
       <motion.section
-        className="relative w-full h-screen overflow-hidden md:rounded-b-[6rem] lg:rounded-b-[9rem]"
+        className="relative w-full overflow-hidden md:rounded-b-[6rem] lg:rounded-b-none"
         initial="hidden"
         animate="visible"
         variants={fadeIn}
       >
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/main/bazar_tashkenta_chorsu.webp"
-            alt="Bazar Toshkent Chorsu"
-            fill
-            priority
-            className="object-cover"
-            quality={90}
-          />
-          {/* Overlay gradient for better text readability */}
-          <div 
-            className="absolute inset-0" 
-            style={{
-              background: 'linear-gradient(to bottom, var(--hero-overlay-start), var(--hero-overlay-middle), var(--hero-overlay-end))'
-            }}
-          />
+        {/* Mobile/iPad: Full Screen Hero Image */}
+        <div className="lg:hidden relative w-full h-screen">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/main/bazar_tashkenta_chorsu.webp"
+              alt="Bazar Toshkent Chorsu"
+              fill
+              priority
+              className="object-cover"
+              quality={90}
+            />
+            {/* Overlay gradient for better text readability */}
+            <div 
+              className="absolute inset-0" 
+              style={{
+                background: 'linear-gradient(to bottom, var(--hero-overlay-start), var(--hero-overlay-middle), var(--hero-overlay-end))'
+              }}
+            />
+          </div>
+
+          {/* Text overlay on the image */}
+          <div className="absolute inset-0 z-10 flex items-center justify-center">
+            <motion.div
+              variants={fadeInUp}
+              className="text-center px-4"
+            >
+              <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 drop-shadow-2xl">
+                {content.hero.title}
+              </h1>
+              <p className="text-xl md:text-2xl text-white/90 font-medium drop-shadow-lg">
+                {content.hero.subtitle}
+              </p>
+            </motion.div>
+          </div>
         </div>
 
-        {/* Optional: Add some text overlay on the image if needed */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center">
+        {/* Desktop: Split Layout with Dark Blue Background */}
+        <div className="hidden lg:flex min-h-screen relative" style={{ backgroundColor: 'rgb(15, 23, 42)' }}>
+          <div className="max-w-7xl mx-auto w-full px-8 py-16 relative z-10 flex-1">
+            <div className="h-full min-h-[80vh] flex items-center">
+              {/* Left Side: Content */}
+              <motion.div
+                variants={fadeInUp}
+                className="space-y-8 text-white max-w-2xl"
+              >
+                <h1 className="text-5xl xl:text-6xl font-extrabold leading-tight">
+                  {content.hero.title}
+                </h1>
+                <p className="text-xl xl:text-2xl text-white/90 font-medium leading-relaxed">
+                  {content.hero.subtitle}
+                </p>
+                <div className="pt-4">
+                  <p className="text-lg text-white/80 leading-relaxed">
+                    <span className="font-bold text-white">EverbestLab</span> — {content.about.description}
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Right Side: Image Box - Positioned to touch right and top edges (from navbar) */}
           <motion.div
             variants={fadeInUp}
-            className="text-center px-4"
+            className="hidden lg:block absolute right-0 top-0 w-[50%] h-full rounded-bl-2xl overflow-hidden shadow-2xl group"
           >
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white mb-6 drop-shadow-2xl">
-              {content.hero.title}
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 font-medium drop-shadow-lg">
-              {content.hero.subtitle}
-            </p>
+            <div className="relative w-full h-full">
+              <Image
+                src="/main/bazar_tashkenta_chorsu.webp"
+                alt="Bazar Toshkent Chorsu"
+                fill
+                priority
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                quality={90}
+              />
+              {/* Gradient overlay from left to create depth */}
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-900/40 via-transparent to-transparent" />
+              {/* Subtle vignette effect on bottom-right */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent" />
+              {/* Decorative corner accent */}
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-blue-600/20 to-transparent blur-3xl" />
+            </div>
           </motion.div>
         </div>
       </motion.section>
