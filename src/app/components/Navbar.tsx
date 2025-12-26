@@ -163,146 +163,125 @@ const Navbar: React.FC = () => {
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: isScrolled ? "rgba(15, 23, 42, 0.5)" : "transparent", // Visible on scroll, transparent by default
-        backdropFilter: isScrolled ? "blur(12px)" : "none", // Blur on scroll only
-        boxShadow: "none" // No shadow
+        background: "transparent", // Always transparent
+        backdropFilter: "none", // No blur on nav itself
+        boxShadow: "none"
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        {/* Islands Design - All Screens */}
+        <div 
+          className="mx-4 mt-4 rounded-2xl px-4 py-3 flex items-center justify-between"
+          style={{
+            backgroundColor: isScrolled ? "rgba(255, 255, 255, 0.9)" : "transparent",
+            backdropFilter: isScrolled ? "blur(20px)" : "none",
+            boxShadow: isScrolled ? "0 8px 32px rgba(0, 0, 0, 0.1)" : "none",
+            transition: "all 0.3s ease"
+          }}
+        >
           {/* Logo */}
           <motion.a
             href={currentLanguage.path === 'uz' ? '/' : `/${currentLanguage.path}`}
-            className="flex items-center gap-2 text-2xl font-bold flex-shrink-0"
+            className="flex items-center gap-2 text-xl font-bold flex-shrink-0"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            style={{ color: isScrolled ? "rgb(15, 23, 42)" : "rgb(255, 255, 255)" }}
           >
             <Building2 
-              className="w-6 h-6 text-white"
+              className="w-5 h-5"
+              style={{ color: isScrolled ? "rgb(15, 23, 42)" : "rgb(255, 255, 255)" }}
             />
-            <span className="text-white">
+            <span>
               Bazaar Admin
             </span>
           </motion.a>
 
-          {/* Desktop Navigation - Center */}
-          <div className="hidden lg:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
-            {navLinks.map((link, index) => {
-              const isActive = isActiveLink(link.path);
-              const fullPath = getNavPath(link.path);
-              return (
-                <motion.a
-                  key={link.name}
-                  href={fullPath}
-                  onClick={(e) => handleNavClick(e, link.path)}
-                  className={`text-sm font-semibold transition-colors cursor-pointer ${
-                    isActive
-                      ? "text-blue-600 dark:text-blue-400 hover:text-blue-300"
-                      : isScrolled
-                      ? "text-slate-700 dark:text-slate-300"
-                      : "text-white hover:text-blue-200"
-                  }`}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 + 0.3 }}
-                >
-                  {link.name}
-                </motion.a>
-              );
-            })}
-          </div>
-
-          
-          {/* Language Selector - Right (Desktop) */}
+          {/* Desktop: Language Selector */}
           <div className="hidden lg:block relative language-selector flex-shrink-0">
-              <motion.button
-                onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
-                  isScrolled
-                    ? "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-                    : "text-white hover:bg-white/10"
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+            <motion.button
+              onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg transition-colors"
+              style={{
+                color: isScrolled ? "rgb(15, 23, 42)" : "rgb(255, 255, 255)"
+              }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <svg 
+                width="25" 
+                height="24" 
+                viewBox="0 0 25 24" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5"
               >
-                <svg 
-                  width="25" 
-                  height="24" 
-                  viewBox="0 0 25 24" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5"
-                >
-                  <circle cx="12.5518" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"></circle>
-                  <ellipse cx="12.5518" cy="12" rx="4" ry="10" stroke="currentColor" strokeWidth="1.5"></ellipse>
-                  <path d="M2.55176 12H22.5518" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                </svg>
-                <span className="text-sm font-semibold">{currentLanguage.name}</span>
-              </motion.button>
+                <circle cx="12.5518" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"></circle>
+                <ellipse cx="12.5518" cy="12" rx="4" ry="10" stroke="currentColor" strokeWidth="1.5"></ellipse>
+                <path d="M2.55176 12H22.5518" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+              </svg>
+              <span className="text-sm font-semibold">{currentLanguage.name}</span>
+            </motion.button>
 
-              <AnimatePresence>
-                {isLanguageMenuOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute right-0 mt-2 w-40 rounded-lg shadow-lg overflow-hidden"
-                    style={{
-                      backgroundColor: "rgba(15, 23, 42, 0.5)",
-                      backdropFilter: "blur(12px)",
-                      zIndex: 9999,
-                      isolation: "isolate",
-                    }}
-                  >
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => handleLanguageChange(lang)}
-                        className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold transition-colors ${
-                          currentLanguage.code === lang.code
-                            ? "bg-white/20 text-white"
-                            : "text-white/90 hover:bg-white/10"
-                        }`}
-                      >
-                        <span className="flex items-center justify-center rounded-sm overflow-hidden" style={{ borderRadius: '4px', width: '20px', height: '15px' }}>
-                          {lang.flag}
-                        </span>
-                        <span>{lang.name}</span>
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+            <AnimatePresence>
+              {isLanguageMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute right-0 mt-2 w-40 rounded-lg shadow-lg overflow-hidden z-50"
+                  style={{
+                    backgroundColor: "rgba(15, 23, 42, 0.5)",
+                    backdropFilter: "blur(12px)",
+                    zIndex: 9999,
+                    isolation: "isolate"
+                  }}
+                >
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => handleLanguageChange(lang)}
+                      className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold transition-colors ${
+                        currentLanguage.code === lang.code
+                          ? "bg-white/20 text-white"
+                          : "text-white/90 hover:bg-white/10"
+                      }`}
+                    >
+                      <span className="flex items-center justify-center rounded-sm overflow-hidden" style={{ borderRadius: '4px', width: '20px', height: '15px' }}>
+                        {lang.flag}
+                      </span>
+                      <span>{lang.name}</span>
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Mobile/iPad: Menu Button */}
           <button
-            className={`lg:hidden p-2 ${
-              isScrolled
-                ? "text-slate-700 dark:text-slate-300"
-                : "text-white"
-            }`}
+            className="lg:hidden p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
+            style={{ color: isScrolled ? "rgb(15, 23, 42)" : "rgb(255, 255, 255)" }}
           >
-            {isMobileMenuOpen ? (
-              <X size={24} />
-            ) : (
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
+              {isMobileMenuOpen ? (
+                <X size={20} />
+              ) : (
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
             )}
           </button>
         </div>
