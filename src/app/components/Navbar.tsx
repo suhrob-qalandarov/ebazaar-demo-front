@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Building2 } from "lucide-react";
+import { X, Building2, Moon, Sun } from "lucide-react";
 import { getStaticContent, getNavLinks } from "@/content";
 import type { Locale } from "@/types/locale";
 
@@ -59,6 +59,7 @@ const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const languages = [
     { code: "uz", path: "uz", name: "Uzbek", flag: <UzbekFlag className="w-5 h-4" /> },
@@ -145,6 +146,33 @@ const Navbar: React.FC = () => {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  // Dark mode initialization and toggle
+  useEffect(() => {
+    // Check localStorage or system preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+    
+    setIsDarkMode(shouldBeDark);
+    if (shouldBeDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+    if (newDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -251,11 +279,78 @@ const Navbar: React.FC = () => {
             </div>
           )}
 
-          {/* Desktop: Language Selector */}
-          <div className="hidden lg:block relative language-selector flex-shrink-0">
+          {/* Desktop: Language Selector and Dark/Light Mode Toggle */}
+          <div className="hidden lg:flex items-center gap-2 flex-shrink-0">
+            {/* Language Selector */}
+            <div className="relative language-selector">
+              <motion.button
+                onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg transition-colors"
+                style={{
+                  color: isMobile 
+                    ? "rgb(15, 23, 42)" 
+                    : isScrolled 
+                      ? "rgb(15, 23, 42)" 
+                      : "rgb(255, 255, 255)"
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <svg 
+                  width="25" 
+                  height="24" 
+                  viewBox="0 0 25 24" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                >
+                  <circle cx="12.5518" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"></circle>
+                  <ellipse cx="12.5518" cy="12" rx="4" ry="10" stroke="currentColor" strokeWidth="1.5"></ellipse>
+                  <path d="M2.55176 12H22.5518" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                </svg>
+                <span className="text-sm font-semibold">{currentLanguage.name}</span>
+              </motion.button>
+
+              <AnimatePresence>
+                {isLanguageMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute right-0 mt-2 w-40 rounded-lg shadow-lg overflow-hidden z-50"
+                    style={{
+                      backgroundColor: "rgba(15, 23, 42, 0.5)",
+                      backdropFilter: "blur(12px)",
+                      zIndex: 9999,
+                      isolation: "isolate"
+                    }}
+                  >
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => handleLanguageChange(lang)}
+                        className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold transition-colors ${
+                          currentLanguage.code === lang.code
+                            ? "bg-white/20 text-white"
+                            : "text-white/90 hover:bg-white/10"
+                        }`}
+                      >
+                        <span className="flex items-center justify-center rounded-sm overflow-hidden" style={{ borderRadius: '4px', width: '20px', height: '15px' }}>
+                          {lang.flag}
+                        </span>
+                        <span>{lang.name}</span>
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Dark/Light Mode Toggle */}
             <motion.button
-              onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg transition-colors"
+              onClick={toggleDarkMode}
+              className="flex items-center justify-center w-10 h-10 rounded-lg transition-colors"
               style={{
                 color: isMobile 
                   ? "rgb(15, 23, 42)" 
@@ -265,56 +360,14 @@ const Navbar: React.FC = () => {
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
-              <svg 
-                width="25" 
-                height="24" 
-                viewBox="0 0 25 24" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5"
-              >
-                <circle cx="12.5518" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"></circle>
-                <ellipse cx="12.5518" cy="12" rx="4" ry="10" stroke="currentColor" strokeWidth="1.5"></ellipse>
-                <path d="M2.55176 12H22.5518" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-              </svg>
-              <span className="text-sm font-semibold">{currentLanguage.name}</span>
-            </motion.button>
-
-            <AnimatePresence>
-              {isLanguageMenuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute right-0 mt-2 w-40 rounded-lg shadow-lg overflow-hidden z-50"
-                  style={{
-                    backgroundColor: "rgba(15, 23, 42, 0.5)",
-                    backdropFilter: "blur(12px)",
-                    zIndex: 9999,
-                    isolation: "isolate"
-                  }}
-                >
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => handleLanguageChange(lang)}
-                      className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold transition-colors ${
-                        currentLanguage.code === lang.code
-                          ? "bg-white/20 text-white"
-                          : "text-white/90 hover:bg-white/10"
-                      }`}
-                    >
-                      <span className="flex items-center justify-center rounded-sm overflow-hidden" style={{ borderRadius: '4px', width: '20px', height: '15px' }}>
-                        {lang.flag}
-                      </span>
-                      <span>{lang.name}</span>
-                    </button>
-                  ))}
-                </motion.div>
+              {isDarkMode ? (
+                <Sun size={20} />
+              ) : (
+                <Moon size={20} />
               )}
-            </AnimatePresence>
+            </motion.button>
           </div>
 
           {/* Mobile/iPad: Menu Button */}
@@ -431,9 +484,10 @@ const Navbar: React.FC = () => {
                   })}
                 </div>
 
-                {/* Languages - Bottom Row */}
+                {/* Languages and Dark Mode - Bottom Row */}
                 <div className="px-6 py-6 border-t border-white/10 flex-shrink-0">
-                  <div className="flex items-center justify-center gap-2 flex-wrap">
+                  <div className="flex items-center justify-center gap-4 flex-wrap">
+                    {/* Languages */}
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
@@ -453,6 +507,20 @@ const Navbar: React.FC = () => {
                         <span>{lang.name}</span>
                       </button>
                     ))}
+                    {/* Dark Mode Toggle */}
+                    <motion.button
+                      onClick={toggleDarkMode}
+                      className="flex items-center justify-center w-10 h-10 rounded-lg text-white/70 hover:bg-white/10 hover:text-white transition-colors"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+                    >
+                      {isDarkMode ? (
+                        <Sun size={20} />
+                      ) : (
+                        <Moon size={20} />
+                      )}
+                    </motion.button>
                   </div>
                 </div>
               </div>

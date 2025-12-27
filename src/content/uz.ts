@@ -41,17 +41,21 @@ export const uzContent = {
   quote_about_section: "EverbestLab 2019-yildan beri O'zbekistonda faoliyat yuritib kelmoqda. Bizning kompaniyamiz web va mobil ilovalar, korporativ tizimlar, e-commerce platformalar va boshqa zamonaviy IT yechimlarini ishlab chiqishda mutaxassislar jamoasiga ega.",
   
   services: {
-    programming: {
-      title: "Dasturlash",
-      description: "Zamonaviy steklarda (Next.js, TS) veb va mobil ilovalar ishlab chiqamiz."
+    shops: {
+      title: "Do'konlar",
+      description: "Arenda to'lovlarini markazlashtirilgan tarzda boshqarish, qarzdorlik va tushumlarni real vaqt rejimida monitoring qilish."
     },
-    digitalization: {
-      title: "Raqamlashtirish",
-      description: "Bozorlar va savdo markazlari uchun maxsus avtomatlashtirish tizimlari."
+    restaurants: {
+      title: "Rastalar",
+      description: "Kichik savdo nuqtalarida arenda to'lovlarini nazorat qilish, to'lovlar tarixini yuritish va monitoring."
     },
-    consulting: {
-      title: "IT Konsalting",
-      description: "Biznesingiz uchun eng to'g'ri texnologik strategiyani tanlashga yordam beramiz."
+    parking: {
+      title: "Avtoturargoh",
+      description: "Avtomobillar kirim-chiqimini hisobga olish, daromad va xarajatlarni samarali boshqarish hamda monitoring."
+    },
+    toilets: {
+      title: "Jamoat hojatxonalari",
+      description: "Kirim-chiqimlarni hisobga olish, daromad va xarajatlarni shaffof boshqarish hamda monitoring qilish."
     }
   },
 
