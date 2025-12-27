@@ -7,7 +7,8 @@ import { motion, Variants } from "framer-motion";
 import {
   Code, Globe, Zap, Target,
   Award, Users, Phone, Mail,
-  MapPin, ChevronRight, LucideIcon
+  MapPin, ChevronRight, LucideIcon,
+  Store, ShoppingBag, Car, Toilet
 } from "lucide-react";
 import type { Locale } from "@/types/locale";
 import type { DynamicHomeData } from "@/types/dynamic";
@@ -327,31 +328,29 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
         </motion.div>
 
         {/* --- Services Grid --- */}
-        <div className="grid lg:grid-cols-2 gap-8">
-          <section className="grid md:grid-cols-2 gap-6">
-            <ServiceCard
-              icon={<Code size={24} />}
-              title={content.services.programming.title}
-              description={content.services.programming.description}
-            />
-            <ServiceCard
-              icon={<Globe size={24} />}
-              title={content.services.digitalization.title}
-              description={content.services.digitalization.description}
-            />
-          </section>
-          <section className="grid md:grid-cols-2 gap-6">
-            <ServiceCard
-              icon={<Code size={24} />}
-              title={content.services.programming.title}
-              description={content.services.programming.description}
-            />
-            <ServiceCard
-              icon={<Globe size={24} />}
-              title={content.services.digitalization.title}
-              description={content.services.digitalization.description}
-            />
-          </section>
+        <div className="grid grid-cols-2 gap-6">
+          {/* 1-row: 2 boxes */}
+          <ServiceCard
+            icon={<Store size={24} />}
+            title={content.services.shops.title}
+            description={content.services.shops.description}
+          />
+          <ServiceCard
+            icon={<ShoppingBag size={24} />}
+            title={content.services.restaurants.title}
+            description={content.services.restaurants.description}
+          />
+          {/* 2-row: 2 boxes */}
+          <ServiceCard
+            icon={<Car size={24} />}
+            title={content.services.parking.title}
+            description={content.services.parking.description}
+          />
+          <ServiceCard
+            icon={<Toilet size={24} />}
+            title={content.services.toilets.title}
+            description={content.services.toilets.description}
+          />
         </div>
 
         {/* --- Values --- */}
@@ -444,10 +443,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description }) =
     whileHover={{ y: -10 }}
     className="p-10 rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 group"
   >
-    <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
-      {icon}
+    <div className="flex items-center justify-between mb-8">
+      <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{title}</h3>
+      <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+        {icon}
+      </div>
     </div>
-    <h3 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">{title}</h3>
     <p className="text-slate-500 dark:text-slate-400 leading-relaxed">{description}</p>
   </motion.div>
 );
