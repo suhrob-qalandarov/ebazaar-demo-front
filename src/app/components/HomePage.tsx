@@ -281,17 +281,17 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
         <div className="grid lg:grid-cols-2 gap-8">
           <motion.section
             variants={fadeInUp}
-            className="relative group overflow-hidden rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl p-6 md:p-12 shadow-2xl shadow-blue-500/5"
+            className="relative group overflow-hidden rounded-xl md:rounded-2xl lg:rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl p-4 md:p-6 lg:p-12 shadow-2xl shadow-blue-500/5"
           >
             <div className="absolute top-0 right-0 -z-10 h-80 w-80 bg-blue-500/10 blur-[120px] rounded-full group-hover:bg-blue-500/20 transition-all duration-700" />
 
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
               <motion.div variants={fadeInUp}>
-                <span className="inline-block px-4 py-2 rounded-full bg-blue-500/10 text-blue-500 text-2xl font-semibold border border-blue-500/20 dark:bg-blue-400/10 dark:text-blue-400">
+                <span className="inline-block px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-blue-500/10 text-blue-500 text-base md:text-xl lg:text-2xl font-semibold border border-blue-500/20 dark:bg-blue-400/10 dark:text-blue-400">
                   {content.about.title}
                 </span>
               </motion.div>           
-              <div className="space-y-4 text-slate-600 dark:text-slate-400 text-lg">
+              <div className="space-y-3 md:space-y-4 text-slate-600 dark:text-slate-400 text-sm md:text-base lg:text-lg leading-relaxed">
                 <p>{content.about.text1}</p>
               </div>
             </div>
@@ -300,17 +300,17 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
           {/* Mission Section */}
           <motion.section
             variants={fadeInUp}
-            className="relative group overflow-hidden rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl p-6 md:p-12 shadow-2xl shadow-blue-500/5"
+            className="relative group overflow-hidden rounded-xl md:rounded-2xl lg:rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl p-4 md:p-6 lg:p-12 shadow-2xl shadow-blue-500/5"
           >
             <div className="absolute top-0 right-0 -z-10 h-80 w-80 bg-blue-500/10 blur-[120px] rounded-full group-hover:bg-blue-500/20 transition-all duration-700" />
 
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
               <motion.div variants={fadeInUp}>
-                <span className="inline-block px-4 py-2 rounded-full bg-blue-500/10 text-blue-500 text-2xl font-semibold border border-blue-500/20 dark:bg-blue-400/10 dark:text-blue-400">
+                <span className="inline-block px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-blue-500/10 text-blue-500 text-base md:text-xl lg:text-2xl font-semibold border border-blue-500/20 dark:bg-blue-400/10 dark:text-blue-400">
                   {content.mission.title}
                 </span>
               </motion.div>           
-              <div className="space-y-4 text-slate-600 dark:text-slate-400 text-lg">
+              <div className="space-y-3 md:space-y-4 text-slate-600 dark:text-slate-400 text-sm md:text-base lg:text-lg leading-relaxed">
                 <p>{content.mission.text1}</p>
               </div>
             </div>
@@ -320,9 +320,9 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
         {/* Quote Box */}
         <motion.div
           variants={fadeInUp}
-          className="p-8 rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform lg:rotate-2"
+          className="p-4 md:p-6 lg:p-8 rounded-xl md:rounded-2xl lg:rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 transform rotate-2"
         >
-          <p className="text-xl font-medium leading-relaxed italic">
+          <p className="text-sm md:text-base lg:text-xl font-medium leading-relaxed italic">
             "{content.quote_about_section}"
           </p>
         </motion.div>
