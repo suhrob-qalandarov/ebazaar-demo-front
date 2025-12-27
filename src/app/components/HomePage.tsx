@@ -328,7 +328,7 @@ const HomePage: React.FC<HomePageProps> = ({ locale, dynamicData }) => {
         </motion.div>
 
         {/* --- Services Grid --- */}
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-4 md:gap-6">
           {/* 1-row: 2 boxes */}
           <ServiceCard
             icon={<Store size={24} />}
@@ -441,15 +441,15 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description }) =
   <motion.div
     variants={fadeInUp}
     whileHover={{ y: -10 }}
-    className="p-10 rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 group"
+    className="p-4 md:p-6 lg:p-10 rounded-xl md:rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 group"
   >
-    <div className="flex items-center justify-between mb-8">
-      <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{title}</h3>
-      <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+    <div className="flex items-center justify-between mb-4 md:mb-6 lg:mb-8 gap-2">
+      <h3 className="text-base md:text-xl lg:text-2xl font-bold text-slate-900 dark:text-white flex-1">{title}</h3>
+      <div className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-xl md:rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
         {icon}
       </div>
     </div>
-    <p className="text-slate-500 dark:text-slate-400 leading-relaxed">{description}</p>
+    <p className="text-sm md:text-base text-slate-500 dark:text-slate-400 leading-relaxed">{description}</p>
   </motion.div>
 );
 
